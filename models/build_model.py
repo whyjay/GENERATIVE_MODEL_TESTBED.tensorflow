@@ -11,8 +11,6 @@ def build_model(model):
     model.label = tf.placeholder(tf.float32, shape=[model.batch_size])
 
     if 'mnist' in model.dataset_name:
-        model.image = tf.divide(model.image, 255., name=None)
-    else:
         model.image = tf.subtract(tf.divide(model.image, 255./2, name=None), 1)
 
     model.z = make_z(shape=[model.batch_size, model.z_dim])
