@@ -47,8 +47,8 @@ def train(model, sess):
                 print_time = time.time()
                 total_time = print_time - start_time
                 sec_per_epoch = (print_time - start_time) / epoch
-                _save_samples(model, sess, idx)
-                model.save(sess, model.checkpoint_dir, idx)
+                _save_samples(model, sess, epoch)
+                model.save(sess, model.checkpoint_dir, epoch)
 
                 print '[Epoch %(epoch)d] time: %(total_time)4.4f, loss_real: %(loss_real).8f, loss_fake: %(loss_fake).8f, sec_per_epoch: %(sec_per_epoch)4.4f' % locals()
 
@@ -60,7 +60,7 @@ def train(model, sess):
     coord.join(threads)
     sess.close()
 
-def _save_samples(model, sess, idx):
+def _save_samples(model, sess, epoch):
     samples = []
     noises = []
 
@@ -75,12 +75,12 @@ def _save_samples(model, sess, idx):
     noises = np.concatenate(noises, axis=0)
 
     assert samples.shape[0] == model.sample_size
-    save_images(samples, [8, 8], os.path.join(model.sample_dir, 'samples_%s.png' % (idx)))
+    save_images(samples, [8, 8], os.path.join(model.sample_dir, 'samples_%s.png' % (epoch)))
 
-    print  "Save Samples at %s/%s" % (model.sample_dir, 'samples_%s' % (idx))
-    with open(os.path.join(model.sample_dir, 'samples_%d.npy'%(idx)), 'w') as f:
+    print  "Save Samples at %s/%s" % (model.sample_dir, 'samples_%s' % (epoch))
+    with open(os.path.join(model.sample_dir, 'samples_%d.npy'%(epoch)), 'w') as f:
         np.save(f, samples)
-    with open(os.path.join(model.sample_dir, 'noises_%d.npy'%(idx)), 'w') as f:
+    with open(os.path.join(model.sample_dir, 'noises_%d.npy'%(epoch)), 'w') as f:
         np.save(f, noises)
 
 def init_training(model, sess):
