@@ -22,8 +22,8 @@ def build_model(model):
 
     # loss
     sigm_ce = tf.nn.sigmoid_cross_entropy_with_logits
-    loss_real = tf.reduce_mean(sigm_ce(logits=logits_real, labels=tf.ones_like(d_real)))
-    loss_fake = tf.reduce_mean(sigm_ce(logits=logits_fake, labels=tf.zeros_like(d_fake)))
+    loss_real = - tf.reduce_mean(sigm_ce(logits=logits_real, labels=tf.ones_like(d_real)))
+    loss_fake = - tf.reduce_mean(sigm_ce(logits=logits_fake, labels=tf.zeros_like(d_fake)))
 
     d_loss = loss_real + loss_fake
     g_loss = - loss_fake
