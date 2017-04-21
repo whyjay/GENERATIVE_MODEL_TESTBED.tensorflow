@@ -1,0 +1,853 @@
+I tensorflow/stream_executor/dso_loader.cc:135] successfully opened CUDA library libcublas.so.8.0 locally
+I tensorflow/stream_executor/dso_loader.cc:135] successfully opened CUDA library libcudnn.so.5 locally
+I tensorflow/stream_executor/dso_loader.cc:135] successfully opened CUDA library libcufft.so.8.0 locally
+I tensorflow/stream_executor/dso_loader.cc:135] successfully opened CUDA library libcuda.so.1 locally
+I tensorflow/stream_executor/dso_loader.cc:135] successfully opened CUDA library libcurand.so.8.0 locally
+W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE3 instructions, but these are available on your machine and could speed up CPU computations.
+W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
+W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
+W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
+W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX2 instructions, but these are available on your machine and could speed up CPU computations.
+W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use FMA instructions, but these are available on your machine and could speed up CPU computations.
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:885] Found device 0 with properties: 
+name: TITAN X (Pascal)
+major: 6 minor: 1 memoryClockRate (GHz) 1.531
+pciBusID 0000:84:00.0
+Total memory: 11.90GiB
+Free memory: 11.76GiB
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:906] DMA: 0 
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:916] 0:   Y 
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+num samples : 66
+/data/whyjay/NIPS2017/samples/EXP40/cifar10/noise/1491279930
+.W tensorflow/core/framework/op_def_util.cc:332] Op BatchNormWithGlobalNormalization is deprecated. It will cease to work in GraphDef version 9. Use tf.nn.batch_normalization().
+......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 800 ------------
+1.242352, 0.022630
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 1600 ------------
+1.248826, 0.034411
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 2400 ------------
+1.271406, 0.029952
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 3200 ------------
+1.266927, 0.028767
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 4000 ------------
+1.257534, 0.025329
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 4800 ------------
+1.258991, 0.021786
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 5600 ------------
+1.267303, 0.018916
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 6400 ------------
+1.263971, 0.028042
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 7200 ------------
+1.265037, 0.021276
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 8000 ------------
+1.252893, 0.037157
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 8800 ------------
+1.240842, 0.026654
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 9600 ------------
+1.240174, 0.029327
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 10400 ------------
+1.267718, 0.022366
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 11200 ------------
+1.254099, 0.017853
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 12000 ------------
+1.258651, 0.015676
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 12800 ------------
+1.263555, 0.020636
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 13600 ------------
+1.271820, 0.021498
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 14400 ------------
+1.253164, 0.026019
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 15200 ------------
+1.262721, 0.022576
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 16000 ------------
+1.266919, 0.010492
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 16800 ------------
+1.281457, 0.014938
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 17600 ------------
+1.267046, 0.035157
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 18400 ------------
+1.244419, 0.015722
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 19200 ------------
+1.251336, 0.020614
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 20000 ------------
+1.260299, 0.034005
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 20800 ------------
+1.253974, 0.027725
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 21600 ------------
+1.260811, 0.018758
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 22400 ------------
+1.245663, 0.022078
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 23200 ------------
+1.258591, 0.018684
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 24000 ------------
+1.260829, 0.029208
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 24800 ------------
+1.261912, 0.025767
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 25600 ------------
+1.269371, 0.022231
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 26400 ------------
+1.266546, 0.033525
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 27200 ------------
+1.267749, 0.012761
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 28000 ------------
+1.267164, 0.018957
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 28800 ------------
+1.266833, 0.034181
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 29600 ------------
+1.268078, 0.032061
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 30400 ------------
+1.270245, 0.026940
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 31200 ------------
+1.251492, 0.029074
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 32000 ------------
+1.257722, 0.028300
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 32800 ------------
+1.275279, 0.023795
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 33600 ------------
+1.257069, 0.030836
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 34400 ------------
+1.261503, 0.029133
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 35200 ------------
+1.260360, 0.024684
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 36000 ------------
+1.235177, 0.019809
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 36800 ------------
+1.252601, 0.011626
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 37600 ------------
+1.255449, 0.029808
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 38400 ------------
+1.253868, 0.020135
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 39200 ------------
+1.274241, 0.029779
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 40000 ------------
+1.250562, 0.024559
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 40800 ------------
+1.261995, 0.031845
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 41600 ------------
+1.252831, 0.016953
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 42400 ------------
+1.243107, 0.019446
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 43200 ------------
+1.252985, 0.041512
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 44000 ------------
+1.254009, 0.035287
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 44800 ------------
+1.264121, 0.023557
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 45600 ------------
+1.251376, 0.017584
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 46400 ------------
+1.238493, 0.010303
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 47200 ------------
+1.271793, 0.019917
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 48000 ------------
+1.252505, 0.025549
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 48800 ------------
+1.268721, 0.033094
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 49600 ------------
+1.262985, 0.027788
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 50400 ------------
+1.262576, 0.024505
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 51200 ------------
+1.242550, 0.028044
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 52000 ------------
+1.261130, 0.025958
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 52800 ------------
+1.273937, 0.024225
+MAX = 1.281457, at 16800
+num samples : 67
+/data/whyjay/NIPS2017/samples/EXP40/cifar10/noise/1491279921
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 800 ------------
+1.288351, 0.031524
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 1600 ------------
+1.278740, 0.022091
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 2400 ------------
+1.262541, 0.024944
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 3200 ------------
+1.274094, 0.025314
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 4000 ------------
+1.261858, 0.025860
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 4800 ------------
+1.274816, 0.022469
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 5600 ------------
+1.278755, 0.015542
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 6400 ------------
+1.281484, 0.032663
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 7200 ------------
+1.285260, 0.038033
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 8000 ------------
+1.268358, 0.016943
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 8800 ------------
+1.274927, 0.033869
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 9600 ------------
+1.280235, 0.038400
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 10400 ------------
+1.273759, 0.018718
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 11200 ------------
+1.259358, 0.029653
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 12000 ------------
+1.270194, 0.030612
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 12800 ------------
+1.283182, 0.026598
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 13600 ------------
+1.274580, 0.021926
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 14400 ------------
+1.275072, 0.040627
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 15200 ------------
+1.280627, 0.028614
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 16000 ------------
+1.251751, 0.018405
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 16800 ------------
+1.282793, 0.027216
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 17600 ------------
+1.267091, 0.026434
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 18400 ------------
+1.266783, 0.018323
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 19200 ------------
+1.293160, 0.038081
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 20000 ------------
+1.283604, 0.033319
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 20800 ------------
+1.284505, 0.035209
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 21600 ------------
+1.285086, 0.026446
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 22400 ------------
+1.277386, 0.023003
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 23200 ------------
+1.278952, 0.037444
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 24000 ------------
+1.291005, 0.032139
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 24800 ------------
+1.268353, 0.033745
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 25600 ------------
+1.278606, 0.040566
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 26400 ------------
+1.275594, 0.025296
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 27200 ------------
+1.276475, 0.024370
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 28000 ------------
+1.263635, 0.021810
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 28800 ------------
+1.267754, 0.017561
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 29600 ------------
+1.267686, 0.030347
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 30400 ------------
+1.274640, 0.023495
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 31200 ------------
+1.297040, 0.031732
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 32000 ------------
+1.273357, 0.033894
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 32800 ------------
+1.306306, 0.018708
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 33600 ------------
+1.264698, 0.027319
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 34400 ------------
+1.264375, 0.024894
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 35200 ------------
+1.281748, 0.028904
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 36000 ------------
+1.278113, 0.038919
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 36800 ------------
+1.272020, 0.027434
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 37600 ------------
+1.253029, 0.023890
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 38400 ------------
+1.300610, 0.024839
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 39200 ------------
+1.289777, 0.034866
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 40000 ------------
+1.261537, 0.034354
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 40800 ------------
+1.280315, 0.039408
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 41600 ------------
+1.270330, 0.026615
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 42400 ------------
+1.291307, 0.033671
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 43200 ------------
+1.274385, 0.029798
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 44000 ------------
+1.280100, 0.014897
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 44800 ------------
+1.262283, 0.023403
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 45600 ------------
+1.281836, 0.032991
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 46400 ------------
+1.272448, 0.021016
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 47200 ------------
+1.269969, 0.019861
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 48000 ------------
+1.283180, 0.028961
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 48800 ------------
+1.278167, 0.031718
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 49600 ------------
+1.265032, 0.033712
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 50400 ------------
+1.262457, 0.033898
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 51200 ------------
+1.276249, 0.028268
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 52000 ------------
+1.277063, 0.033733
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 52800 ------------
+1.271908, 0.028339
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 53600 ------------
+1.276685, 0.025149
+MAX = 1.306306, at 32800
+num samples : 84
+/data/whyjay/NIPS2017/samples/EXP40/cifar10/noise/1491279964
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 800 ------------
+1.260851, 0.027952
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 1600 ------------
+1.254540, 0.015169
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 2400 ------------
+1.255158, 0.030160
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 3200 ------------
+1.292705, 0.034609
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 4000 ------------
+1.254620, 0.025423
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 4800 ------------
+1.267262, 0.020079
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 5600 ------------
+1.272635, 0.035170
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 6400 ------------
+1.261540, 0.026465
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 7200 ------------
+1.237280, 0.023964
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 8000 ------------
+1.249091, 0.027386
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 8800 ------------
+1.249605, 0.031173
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 9600 ------------
+1.251459, 0.031252
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 10400 ------------
+1.266274, 0.025222
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 11200 ------------
+1.241053, 0.030931
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 12000 ------------
+1.251439, 0.019193
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 12800 ------------
+1.255269, 0.017259
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 13600 ------------
+1.277816, 0.021614
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 14400 ------------
+1.263268, 0.032261
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 15200 ------------
+1.265982, 0.020949
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 16000 ------------
+1.257771, 0.027098
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 16800 ------------
+1.268463, 0.024382
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 17600 ------------
+1.247977, 0.029269
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 18400 ------------
+1.247111, 0.022989
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 19200 ------------
+1.249708, 0.042506
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 20000 ------------
+1.280909, 0.027764
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 20800 ------------
+1.276730, 0.021047
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 21600 ------------
+1.252782, 0.021787
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 22400 ------------
+1.264950, 0.024904
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 23200 ------------
+1.266360, 0.033150
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 24000 ------------
+1.260344, 0.033134
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 24800 ------------
+1.247429, 0.023956
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 25600 ------------
+1.248739, 0.032320
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 26400 ------------
+1.252182, 0.026649
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 27200 ------------
+1.249414, 0.040702
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 28000 ------------
+1.268198, 0.034854
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 28800 ------------
+1.266910, 0.031082
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 29600 ------------
+1.265654, 0.036449
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 30400 ------------
+1.266223, 0.027247
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 31200 ------------
+1.258773, 0.029467
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 32000 ------------
+1.267076, 0.022849
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 32800 ------------
+1.252494, 0.022908
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 33600 ------------
+1.262282, 0.021604
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 34400 ------------
+1.286711, 0.028672
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 35200 ------------
+1.256336, 0.023733
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 36000 ------------
+1.267060, 0.020464
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 36800 ------------
+1.256344, 0.016696
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 37600 ------------
+1.256064, 0.018348
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 38400 ------------
+1.262219, 0.023887
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 39200 ------------
+1.268634, 0.022495
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 40000 ------------
+1.265078, 0.014551
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 40800 ------------
+1.273591, 0.021245
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 41600 ------------
+1.274395, 0.029978
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 42400 ------------
+1.278884, 0.030846
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 43200 ------------
+1.259915, 0.012873
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 44000 ------------
+1.263946, 0.035573
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 44800 ------------
+1.272824, 0.026349
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 45600 ------------
+1.257939, 0.028372
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 46400 ------------
+1.277093, 0.037596
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 47200 ------------
+1.274929, 0.024028
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 48000 ------------
+1.257336, 0.019491
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 48800 ------------
+1.261767, 0.023043
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 49600 ------------
+1.246304, 0.016505
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 50400 ------------
+1.278721, 0.020843
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 51200 ------------
+1.254865, 0.028516
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 52000 ------------
+1.269637, 0.030680
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 52800 ------------
+1.243953, 0.024646
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 53600 ------------
+1.250265, 0.019730
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 54400 ------------
+1.264046, 0.039107
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 55200 ------------
+1.255844, 0.023063
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 56000 ------------
+1.262395, 0.028256
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 56800 ------------
+1.257708, 0.021677
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 57600 ------------
+1.270936, 0.023669
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 58400 ------------
+1.257414, 0.021956
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 59200 ------------
+1.251589, 0.032800
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 60000 ------------
+1.229849, 0.020681
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 60800 ------------
+1.254708, 0.028889
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 61600 ------------
+1.256571, 0.027068
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 62400 ------------
+1.254164, 0.027658
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 63200 ------------
+1.269529, 0.023240
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 64000 ------------
+1.248383, 0.026043
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 64800 ------------
+1.263371, 0.025365
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 65600 ------------
+1.257265, 0.023337
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 66400 ------------
+1.253381, 0.024113
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 67200 ------------
+1.275634, 0.020247
+MAX = 1.292705, at 3200
+num samples : 56
+/data/whyjay/NIPS2017/samples/EXP40/cifar10/noise/1491294821
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 800 ------------
+1.251145, 0.029108
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 1600 ------------
+1.259370, 0.019463
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 2400 ------------
+1.262588, 0.027011
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 3200 ------------
+1.249752, 0.015881
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 4000 ------------
+1.255309, 0.016982
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 4800 ------------
+1.244188, 0.032381
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 5600 ------------
+1.272560, 0.037520
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 6400 ------------
+1.257941, 0.035266
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 7200 ------------
+1.257062, 0.025214
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 8000 ------------
+1.248688, 0.018027
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 8800 ------------
+1.246701, 0.032048
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 9600 ------------
+1.253545, 0.029157
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 10400 ------------
+1.243985, 0.014584
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 11200 ------------
+1.261213, 0.024458
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 12000 ------------
+1.242804, 0.024227
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 12800 ------------
+1.255614, 0.031787
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 13600 ------------
+1.248352, 0.017188
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 14400 ------------
+1.265472, 0.022003
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 15200 ------------
+1.251371, 0.028334
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 16000 ------------
+1.278303, 0.018431
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 16800 ------------
+1.254383, 0.020321
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 17600 ------------
+1.259319, 0.022914
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 18400 ------------
+1.254315, 0.029298
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 19200 ------------
+1.252507, 0.024995
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 20000 ------------
+1.260610, 0.034827
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 20800 ------------
+1.258205, 0.023973
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 21600 ------------
+1.261224, 0.025356
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 22400 ------------
+1.243590, 0.018833
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 23200 ------------
+1.269153, 0.031060
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 24000 ------------
+1.254030, 0.025344
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 24800 ------------
+1.259639, 0.021748
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 25600 ------------
+1.262630, 0.030431
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 26400 ------------
+1.281840, 0.022882
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 27200 ------------
+1.249116, 0.035601
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 28000 ------------
+1.263380, 0.030871
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 28800 ------------
+1.254477, 0.028064
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 29600 ------------
+1.256970, 0.021467
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 30400 ------------
+1.249632, 0.032882
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 31200 ------------
+1.264618, 0.018128
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 32000 ------------
+1.250957, 0.021022
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 32800 ------------
+1.249016, 0.032264
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 33600 ------------
+1.248015, 0.016187
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 34400 ------------
+1.258203, 0.017100
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 35200 ------------
+1.266017, 0.019840
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 36000 ------------
+1.244739, 0.022344
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 36800 ------------
+1.244133, 0.013769
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 37600 ------------
+1.245511, 0.021052
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 38400 ------------
+1.266573, 0.029358
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 39200 ------------
+1.269718, 0.024185
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 40000 ------------
+1.246008, 0.020931
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 40800 ------------
+1.257336, 0.030316
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 41600 ------------
+1.271644, 0.020727
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 42400 ------------
+1.258535, 0.028107
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 43200 ------------
+1.275628, 0.027913
+.......I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: TITAN X (Pascal), pci bus id: 0000:84:00.0)
+---------- SCORE in 44000 ------------
+1.253864, 0.023376
+.......---------- SCORE in 44800 ------------
+1.278852, 0.026323
+MAX = 1.281840, at 26400
+[('samples/EXP40/cifar10/noise/1491279930', 1.2814569473266602, 0.014937798492610455, 16800), ('samples/EXP40/cifar10/noise/1491279921', 1.3063062429428101, 0.018708191812038422, 32800), ('samples/EXP40/cifar10/noise/1491279964', 1.2927050590515137, 0.034608945250511169, 3200), ('samples/EXP40/cifar10/noise/1491294821', 1.2818396091461182, 0.022881761193275452, 26400)]
