@@ -43,6 +43,8 @@ class Config(object):
         self.build_model_func = build_model
         self.train_func=train
 
+        self.loss = FLAGS.loss
+
         # Learning rate
         self.generator_learning_rate=0.0002
         self.discriminator_learning_rate=0.0002

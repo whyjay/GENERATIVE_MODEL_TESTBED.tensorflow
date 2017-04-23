@@ -105,5 +105,8 @@ def init_training(model, sess):
 
 def load_dataset(model):
     if model.dataset_name == 'mnist':
-        from tensorflow.contrib.learn.python.learn.datasets import mnist
+        import mnist
         return mnist.read_data_sets(model.dataset_path, dtype=tf.uint8, reshape=False, validation_size=0).train
+    elif model.dataset_name == 'cifar10':
+        import cifar10
+        return cifar10.read_data_sets(model.dataset_path, dtype=tf.uint8, reshape=False, validation_size=0).train

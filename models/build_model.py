@@ -9,23 +9,14 @@ def build_model(model):
     # input
     model.image = tf.placeholder(tf.float32, shape=[model.batch_size]+model.image_shape)
     model.label = tf.placeholder(tf.float32, shape=[model.batch_size])
-
-    if 'mnist' in model.dataset_name:
-        model.image = tf.subtract(tf.divide(model.image, 255./2, name=None), 1)
+    image = tf.subtract(tf.divide(model.image, 255./2, name=None), 1)
 
     model.z = make_z(shape=[model.batch_size, model.z_dim])
     model.gen_image = model.generator(model.z)
-    d_real, logits_real = model.discriminator(model.image)
-    d_fake, logits_fake = model.discriminator(model.gen_image, reuse=True)
+    d_out_real = model.discriminator(image)
+    d_out_fake = model.discriminator(model.gen_image, reuse=True)
 
-    # loss
-    sigm_ce = tf.nn.sigmoid_cross_entropy_with_logits
-    loss_real = - tf.reduce_mean(sigm_ce(logits=logits_real, labels=tf.ones_like(d_real)))
-    loss_fake = - tf.reduce_mean(sigm_ce(logits=logits_fake, labels=tf.zeros_like(d_fake)))
-
-    d_loss = loss_real + loss_fake
-    g_loss = - loss_fake
-
+    d_loss, g_loss, d_real, d_fake = get_loss(d_out_real, d_out_fake, config.loss)
 
     # optimizer
     model.get_vars()
@@ -39,8 +30,6 @@ def build_model(model):
     # logging
     tf.summary.scalar("d_real", tf.reduce_mean(d_real))
     tf.summary.scalar("d_fake", tf.reduce_mean(d_fake))
-    tf.summary.scalar("logits_real", tf.reduce_mean(logits_real))
-    tf.summary.scalar("logits_fake", tf.reduce_mean(logits_fake))
     tf.summary.scalar("d_loss", d_loss)
     tf.summary.scalar("g_loss", g_loss)
     model.loss_real = loss_real
@@ -50,3 +39,21 @@ def build_model(model):
     model.saver = tf.train.Saver(max_to_keep=None)
 
     return d_optimize, g_optimize
+
+def jsd_loss(d_out_real, d_out_fake, loss='jsd'):
+    sigm_ce = tf.nn.sigmoid_cross_entropy_with_logits
+    loss_real = - tf.reduce_mean(sigm_ce(logits=d_out_real, labels=tf.ones_like(d_out_real)))
+    loss_fake = - tf.reduce_mean(sigm_ce(logits=d_out_fake, labels=tf.zeros_like(d_out_fake)))
+    loss_fake_ = - tf.reduce_mean(sigm_ce(logits=d_out_fake, labels=tf.ones_like(d_out_fake)))
+
+    if loss == 'jsd':
+        d_loss = loss_real + loss_fake
+        g_loss = - loss_fake
+    elif loss == 'alternative':
+        d_loss = loss_real + loss_fake
+        g_loss = loss_fake_
+    elif loss == 'reverse_kl':
+        d_loss = loss_real + loss_fake
+        g_loss = loss_fake_ - loss_fake
+
+    return d_loss, g_loss, tf.nn.sigmoid(d_out_real), tf.nn.sigmoid(d_out_fake)
