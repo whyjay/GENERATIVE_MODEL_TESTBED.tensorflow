@@ -6,10 +6,8 @@ import tensorflow as tf
 from ops import *
 from utils import *
 
-from models.build_model import build_model
 from models.generator import *
 from models.discriminator import *
-from models.train import train
 #from models.evaluate import evaluate
 from utils import pp, visualize, to_json
 
@@ -39,9 +37,6 @@ class Config(object):
 
         self.generator_func = globals()[self.generator_name]
         self.discriminator_func = globals()[self.discriminator_name]
-
-        self.build_model_func = build_model
-        self.train_func=train
 
         self.loss = FLAGS.loss
 

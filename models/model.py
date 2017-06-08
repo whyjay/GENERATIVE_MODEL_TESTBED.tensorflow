@@ -17,10 +17,7 @@ class GAN(object):
         self.generator = NetworkWrapper(self, config.generator_func)
         self.discriminator = NetworkWrapper(self, config.discriminator_func)
 
-        self.train = Train(self, config.train_func)
         #self.evaluate = Evaluate(self, config.eval_func)
-
-        self.build_model = BuildModel(self, config.build_model_func)
 
         self.batch_size = config.batch_size
         self.sample_size = config.sample_size
@@ -76,14 +73,62 @@ class GAN(object):
             assert x in  self.g_vars or x in self.d_vars, x.name
         self.all_vars = t_vars
 
+    def build_model(self):
+        config = self.config
 
-class BuildModel(object):
-    def __init__(self, model, func):
-        self.model = model
-        self.func = func
+        # input
+        self.image = tf.placeholder(tf.float32, shape=[self.batch_size]+self.image_shape)
+        self.label = tf.placeholder(tf.float32, shape=[self.batch_size])
+        image = tf.subtract(tf.divide(self.image, 255./2, name=None), 1)
 
-    def __call__(self):
-        return self.func(self.model)
+        self.z = make_z(shape=[self.batch_size, self.z_dim])
+        self.gen_image = self.generator(self.z)
+        d_out_real = self.discriminator(image)
+        d_out_fake = self.discriminator(self.gen_image, reuse=True)
+
+        d_loss, g_loss, d_real, d_fake = get_loss(d_out_real, d_out_fake, config.loss)
+
+        # optimizer
+        self.get_vars()
+        d_opt = tf.train.RMSPropOptimizer(config.discriminator_learning_rate)
+        g_opt = tf.train.RMSPropOptimizer(config.generator_learning_rate)
+        d_grads = d_opt.compute_gradients(d_loss, var_list=self.d_vars)
+        g_grads = g_opt.compute_gradients(g_loss, var_list=self.g_vars)
+        d_optimize = d_opt.apply_gradients(d_grads)
+        g_optimize = g_opt.apply_gradients(g_grads)
+
+        # logging
+        tf.summary.scalar("d_real", tf.reduce_mean(d_real))
+        tf.summary.scalar("d_fake", tf.reduce_mean(d_fake))
+        tf.summary.scalar("d_loss", d_loss)
+        tf.summary.scalar("g_loss", g_loss)
+        self.loss_real = loss_real
+        self.loss_fake = loss_fake
+        #tf.summary.histogram("d_grads", d_grads)
+        #tf.summary.histogram("g_grads", g_grads)
+        self.saver = tf.train.Saver(max_to_keep=None)
+
+        return d_optimize, g_optimize
+
+    def get_loss(d_out_real, d_out_fake, loss='jsd'):
+        sigm_ce = tf.nn.sigmoid_cross_entropy_with_logits
+        loss_real = - tf.reduce_mean(sigm_ce(logits=d_out_real, labels=tf.ones_like(d_out_real)))
+        loss_fake = - tf.reduce_mean(sigm_ce(logits=d_out_fake, labels=tf.zeros_like(d_out_fake)))
+        loss_fake_ = - tf.reduce_mean(sigm_ce(logits=d_out_fake, labels=tf.ones_like(d_out_fake)))
+
+        if loss == 'jsd':
+            d_loss = loss_real + loss_fake
+            g_loss = - loss_fake
+        elif loss == 'alternative':
+            d_loss = loss_real + loss_fake
+            g_loss = loss_fake_
+        elif loss == 'reverse_kl':
+            d_loss = loss_real + loss_fake
+            g_loss = loss_fake_ - loss_fake
+
+        return d_loss, g_loss, tf.nn.sigmoid(d_out_real), tf.nn.sigmoid(d_out_fake)
+
+
 
 class NetworkWrapper(object):
     def __init__(self, model, func):
@@ -94,10 +139,3 @@ class NetworkWrapper(object):
         return self.func(self.model, z, reuse=reuse)
 
 
-class Train(object):
-    def __init__(self, model, func):
-        self.model = model
-        self.func = func
-
-    def __call__(self, sess):
-        return self.func(self.model, sess)

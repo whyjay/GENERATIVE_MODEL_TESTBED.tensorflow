@@ -4,6 +4,7 @@ import tensorflow as tf
 
 from models.config import Config
 from models.model import GAN
+from models.train import train
 from utils import pp, visualize, to_json
 
 from IPython import embed
@@ -34,7 +35,8 @@ def main(_):
         model = GAN(config)
         if FLAGS.load_cp_dir is not '':
             model.load(FLAGS.load_cp_dir)
-        model.train(sess)
+
+        train(model, sess)
 
         #OPTION = 2
         #visualize(sess, gan, FLAGS, OPTION)
