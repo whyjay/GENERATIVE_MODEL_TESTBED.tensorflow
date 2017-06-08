@@ -92,10 +92,8 @@ class GAN(object):
         self.get_vars()
         d_opt = tf.train.RMSPropOptimizer(config.discriminator_learning_rate)
         g_opt = tf.train.RMSPropOptimizer(config.generator_learning_rate)
-        d_grads = d_opt.compute_gradients(d_loss, var_list=self.d_vars)
-        g_grads = g_opt.compute_gradients(g_loss, var_list=self.g_vars)
-        d_optimize = d_opt.apply_gradients(d_grads)
-        g_optimize = g_opt.apply_gradients(g_grads)
+        d_optimize = slim.learning.create_train_op(d_loss, d_opt, variables_to_train=self.d_vars)
+        g_optimize = slim.learning.create_train_op(g_loss, g_opt, variables_to_train=self.g_vars)
 
         # logging
         tf.summary.scalar("d_real", tf.reduce_mean(d_real))

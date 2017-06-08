@@ -1,5 +1,6 @@
 import tensorflow as tf
 from ops import *
+slim = tf.contrib.slim
 
 from IPython import embed
 
@@ -18,18 +19,18 @@ def base_generator(model, z, reuse=False):
         if reuse:
             scope.reuse_variables()
 
-        h = tf.nn.relu(bn(linear(z, w_start*w_start*c_start, 'h0_lin', stddev=0.05), 'bn_0_lin'))
+        h = slim.fully_connected(h, w_start*w_start*c_start, activation_fn=tf.nn.relu, normalizer_fn=slim.batch_norm)
         h = tf.reshape(h, [-1, w_start, w_start, c_start])
 
         for i in range(1, n_layer):
             out_shape = [model.batch_size]+[w_start*2**i]*2+[c_start*2**i]
-            h = tf.nn.relu(bn(deconv2d(h, out_shape, stddev=0.05, name='h%d'%i), 'bn%d'%i))
-            h = tf.nn.relu(bn(conv2d(h, out_shape[-1], k=3, d=1, stddev=0.02, name='h%d_'%i), 'bn%d_'%i))
+            h = slim.conv2d_transpose(h, c, 4, 2, activation_fn=tf.nn.relu, normalizer_fn=slim.batch_norm)
+            h = slim.conv2d(h, c, [3, 3], 1, activation_fn=tf.nn.relu, normalizer_fn=slim.batch_norm)
 
         i += 1
-        out_shape = [model.batch_size]+[w_start*2**i]*2+[c_start*2**i]
-        h = tf.nn.relu(bn(deconv2d(h, out_shape, stddev=0.05, name='h%d'%i), 'bn%d'%i))
-        x = tf.nn.tanh(bn(conv2d(h, model.c_dim, k=3, d=1, stddev=0.02, name='h%d_'%i), 'bn%d_'%i))
+        c = c_start*2**i
+        h = slim.conv2d_transpose(h, c, 4, 2, activation_fn=tf.nn.relu, normalizer_fn=slim.batch_norm)
+        x = slim.conv2d(h, c, [3, 3], 1, activation_fn=tf.nn.tanh, normalizer_fn=slim.batch_norm)
 
     return x
 
