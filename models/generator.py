@@ -23,7 +23,7 @@ def base_generator(model, z, reuse=False):
         h = tf.reshape(h, [-1, w_start, w_start, c_start])
 
         for i in range(1, n_layer):
-            out_shape = [model.batch_size]+[w_start*2**i]*2+[c_start*2**i]
+            out_shape = [model.batch_size]+[w_start*2**i]*2+[c_start/2**i]
             h = slim.conv2d_transpose(h, c, 4, 2, activation_fn=tf.nn.relu, normalizer_fn=slim.batch_norm)
             h = slim.conv2d(h, c, [3, 3], 1, activation_fn=tf.nn.relu, normalizer_fn=slim.batch_norm)
 
