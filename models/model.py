@@ -82,13 +82,15 @@ class GAN(object):
         # input
         self.image = tf.placeholder(tf.float32, shape=[self.batch_size]+self.image_shape)
         self.label = tf.placeholder(tf.float32, shape=[self.batch_size])
+        self.z = tf.placeholder(tf.float32, shape=[self.batch_size, self.z_dim])
 
         if self.dataset_name == 'mnist':
             image = tf.divide(self.image, 255., name=None)
         else:
             image = tf.subtract(tf.divide(self.image, 255./2, name=None), 1)
 
-        self.z = make_z(shape=[self.batch_size, self.z_dim])
+        #self.z = make_z(shape=[self.batch_size, self.z_dim])
+
         self.gen_image = self.generator(self.z)
         d_out_real = self.discriminator(image)
         d_out_fake = self.discriminator(self.gen_image, reuse=True)

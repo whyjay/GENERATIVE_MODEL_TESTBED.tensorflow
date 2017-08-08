@@ -26,9 +26,12 @@ def train(model, sess):
 
             # D step
             image, label = dataset.next_batch(model.batch_size)
+            # _, d_real, d_fake, summary = sess.run(
+                # [d_optim, model.d_real, model.d_fake, merged_sum],
+                # feed_dict={model.image:image, model.label:label})
             _, d_real, d_fake, summary = sess.run(
                 [d_optim, model.d_real, model.d_fake, merged_sum],
-                feed_dict={model.image:image, model.label:label})
+                feed_dict={model.image:image, model.label:label, model.z:get_z(model)})
             model.writer.add_summary(summary, idx)
             '''
             # Wasserstein
@@ -37,8 +40,10 @@ def train(model, sess):
 
             # G step
             image, label = dataset.next_batch(model.batch_size)
+            # _, summary = sess.run([g_optim, merged_sum],
+                                        # feed_dict={model.image:image, model.label:label})
             _, summary = sess.run([g_optim, merged_sum],
-                                        feed_dict={model.image:image, model.label:label})
+                                  feed_dict={model.image:image, model.label:label, model.z:get_z(model)})
             model.writer.add_summary(summary, idx)
 
             # save checkpoint for every epoch
@@ -60,14 +65,37 @@ def train(model, sess):
     coord.join(threads)
     sess.close()
 
+def generate_grid_images(model, sess):
+    d_optim, g_optim = model.build_model()
+    coord, threads, merged_sum = init_training(model, sess)
+    grid_size = 100
+    samples = np.zeros(grid_size, grid_size, 28, 28, 1)
+
+    for i, y in enumerate(np.arange(-1., 1., 1./grid_size)):
+        for j, x in enumerate(np.arange(1., -1., 1./grid_size)):
+            z = get_z(model)
+            z[:,0] = y
+            z[:,1] = x
+            samples[i, j, :] = sess.run([model.gen_image], feed_dict={model.z:z})
+
+    with open(os.path.join(model.sample_dir, 'samples_grid_%d.npy'%(epoch)), 'w') as f:
+        np.save(f, samples)
+
+    coord.join(threads)
+    sess.close()
+
+def generate(model, z):
+
+
 def _save_samples(model, sess, epoch):
     samples = []
     noises = []
 
     # generator hard codes the batch size
     for i in xrange(model.sample_size // model.batch_size):
-        gen_image, noise = sess.run(
-            [model.gen_image, model.z])
+        # gen_image, noise = sess.run([model.gen_image, model.z])
+        gen_image, noise = sess.run([model.gen_image, model.z],
+                                    feed_dict={model.z:get_z(model)})
         samples.append(gen_image)
         noises.append(noise)
 
@@ -110,3 +138,6 @@ def load_dataset(model):
     elif model.dataset_name == 'cifar10':
         import cifar10
         return cifar10.read_data_sets(model.dataset_path, dtype=tf.uint8, reshape=False, validation_size=0).train
+
+def get_z(model):
+    return np.random.uniform(-1., 1., size=(model.batch_size, model.z_dim))
