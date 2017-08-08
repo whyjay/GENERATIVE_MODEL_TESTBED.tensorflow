@@ -8,6 +8,8 @@ from ops import *
 from utils import *
 from IPython import embed
 
+slim = tf.contrib.slim
+
 class GAN(object):
     def __init__(self, config):
         self.devices = config.devices
@@ -27,6 +29,7 @@ class GAN(object):
         self.y_dim = config.y_dim
         self.c_dim = config.c_dim
         self.f_dim = config.f_dim
+        self.fc_dim = config.fc_dim
         self.z_dim = config.z_dim
 
         self.dataset_name = config.dataset
@@ -70,7 +73,7 @@ class GAN(object):
         for x in self.g_vars:
             assert x not in self.d_vars
         for x in t_vars:
-            assert x in  self.g_vars or x in self.d_vars, x.name
+            assert x in self.g_vars or x in self.d_vars, x.name
         self.all_vars = t_vars
 
     def build_model(self):
@@ -79,14 +82,18 @@ class GAN(object):
         # input
         self.image = tf.placeholder(tf.float32, shape=[self.batch_size]+self.image_shape)
         self.label = tf.placeholder(tf.float32, shape=[self.batch_size])
-        image = tf.subtract(tf.divide(self.image, 255./2, name=None), 1)
+
+        if self.dataset_name == 'mnist':
+            image = tf.divide(self.image, 255., name=None)
+        else:
+            image = tf.subtract(tf.divide(self.image, 255./2, name=None), 1)
 
         self.z = make_z(shape=[self.batch_size, self.z_dim])
         self.gen_image = self.generator(self.z)
         d_out_real = self.discriminator(image)
         d_out_fake = self.discriminator(self.gen_image, reuse=True)
 
-        d_loss, g_loss, d_real, d_fake = get_loss(d_out_real, d_out_fake, config.loss)
+        d_loss, g_loss, d_real, d_fake = self.get_loss(d_out_real, d_out_fake, config.loss)
 
         # optimizer
         self.get_vars()
@@ -96,19 +103,19 @@ class GAN(object):
         g_optimize = slim.learning.create_train_op(g_loss, g_opt, variables_to_train=self.g_vars)
 
         # logging
-        tf.summary.scalar("d_real", tf.reduce_mean(d_real))
-        tf.summary.scalar("d_fake", tf.reduce_mean(d_fake))
+        tf.summary.scalar("d_real", d_real)
+        tf.summary.scalar("d_fake", d_fake)
         tf.summary.scalar("d_loss", d_loss)
         tf.summary.scalar("g_loss", g_loss)
-        self.loss_real = loss_real
-        self.loss_fake = loss_fake
-        #tf.summary.histogram("d_grads", d_grads)
-        #tf.summary.histogram("g_grads", g_grads)
+        tf.summary.image("fake_images", batch_to_grid(self.gen_image))
+        tf.summary.image("real_images", batch_to_grid(image))
+        self.d_real = d_real
+        self.d_fake = d_fake
         self.saver = tf.train.Saver(max_to_keep=None)
 
         return d_optimize, g_optimize
 
-    def get_loss(d_out_real, d_out_fake, loss='jsd'):
+    def get_loss(self, d_out_real, d_out_fake, loss='jsd'):
         sigm_ce = tf.nn.sigmoid_cross_entropy_with_logits
         loss_real = - tf.reduce_mean(sigm_ce(logits=d_out_real, labels=tf.ones_like(d_out_real)))
         loss_fake = - tf.reduce_mean(sigm_ce(logits=d_out_fake, labels=tf.zeros_like(d_out_fake)))
@@ -124,7 +131,7 @@ class GAN(object):
             d_loss = loss_real + loss_fake
             g_loss = loss_fake_ - loss_fake
 
-        return d_loss, g_loss, tf.nn.sigmoid(d_out_real), tf.nn.sigmoid(d_out_fake)
+        return d_loss, g_loss, tf.reduce_mean(tf.nn.sigmoid(d_out_real)), tf.reduce_mean(tf.nn.sigmoid(d_out_fake))
 
 
 

@@ -18,7 +18,7 @@ import math
 import sys
 from ops import *
 
-MODEL_DIR = '/data/whyjay/NIPS2017/checkpoint/mnist_evaluator/'
+MODEL_DIR = 'checkpoints'
 softmax = None
 x = None
 
@@ -75,14 +75,14 @@ def _init_model():
     # Works with an arbitrary minibatch size.
     x = tf.placeholder(tf.float32, shape=[None, 28, 28, 1])
 
-    h = tf.nn.relu(conv2d(x, 32, d_h=1, d_w=1, name='h0'))
+    h = slim.conv2d(images, 32, 3, 1, activation_fn=tf.nn.relu, normalizer_fn=None)
     h = tf.nn.max_pool(h, ksize=[1, 2, 2, 1], strides=[1, 2, 2, 1], padding='SAME')
-    h = tf.nn.relu(conv2d(h, 64, d_h=1, d_w=1, name='h1'))
+    h = slim.conv2d(images, 64, 3, 1, activation_fn=tf.nn.relu, normalizer_fn=None)
     h = tf.nn.max_pool(h, ksize=[1, 2, 2, 1], strides=[1, 2, 2, 1], padding='SAME')
     h = tf.reshape(h, [-1, 7*7*64])
-    h = linear(h, 1024, scope='h3')
+    h = slim.fully_connected(h, 1024, activation_fn=None, normalizer_fn=None)
     h = tf.nn.dropout(h, 1.0)
-    logits = linear(h, 10, scope='logit')
+    logits = slim.fully_connected(h, 10, activation_fn=None, normalizer_fn=None)
     softmax = tf.nn.softmax(logits)
 
 if softmax is None or x is None:

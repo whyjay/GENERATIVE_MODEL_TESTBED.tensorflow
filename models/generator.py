@@ -4,61 +4,38 @@ slim = tf.contrib.slim
 
 from IPython import embed
 
-def dcgan(model, z, reuse=False):
-    if model.dataset_name == 'mnist':
-        n_layer = 2
-    else:
-        n_layer = 4
-
+def dcgan_g(model, z, reuse=False):
     bs = model.batch_size
-    w_start = model.image_shape[0]/2**(n_layer)
-    c_start = model.c_dim * 2**(n_layer)
+    f_dim = model.f_dim
+    fc_dim = model.fc_dim
+    c_dim = model.c_dim
 
-    with tf.variable_scope('g_') as scope:
-        if reuse:
-            scope.reuse_variables()
+    with tf.variable_scope('g_', reuse=reuse) as scope:
 
-        h = slim.fully_connected(h, w_start*w_start*c_start, activation_fn=tf.nn.relu, normalizer_fn=slim.batch_norm)
-        h = tf.reshape(h, [-1, w_start, w_start, c_start])
+        if model.dataset_name == 'mnist':
+            n_layer = 2
+            w = model.image_shape[0]
 
-        for i in range(1, n_layer):
-            out_shape = [model.batch_size]+[w_start*2**i]*2+[c_start/2**i]
-            h = slim.conv2d_transpose(h, c, 4, 2, activation_fn=tf.nn.relu, normalizer_fn=slim.batch_norm)
-            h = slim.conv2d(h, c, [3, 3], 1, activation_fn=tf.nn.relu, normalizer_fn=slim.batch_norm)
+            h = slim.fully_connected(z, fc_dim, activation_fn=tf.nn.relu, normalizer_fn=slim.batch_norm)
+            h = slim.fully_connected(h, f_dim*2*(w/4)*(w/4), activation_fn=tf.nn.relu, normalizer_fn=slim.batch_norm)
+            h = tf.reshape(h, [-1, w/4, w/4, f_dim*2])
+            h = slim.conv2d_transpose(h, f_dim*2, 4, 2, activation_fn=tf.nn.relu, normalizer_fn=slim.batch_norm)
+            x = slim.conv2d_transpose(h, c_dim, 4, 2, activation_fn=tf.nn.sigmoid, normalizer_fn=None)
 
-        i += 1
-        c = c_start*2**i
-        h = slim.conv2d_transpose(h, c, 4, 2, activation_fn=tf.nn.relu, normalizer_fn=slim.batch_norm)
-        x = slim.conv2d(h, c, [3, 3], 1, activation_fn=tf.nn.tanh, normalizer_fn=slim.batch_norm)
+        else:
+            n_layer = 4
+            c = 2**(n_layer - 1)
+            w = model.image_shape[0]/2**(n_layer)
 
-    return x
+            h = slim.fully_connected(z, f_dim * c * w * w, activation_fn=tf.nn.relu, normalizer_fn=slim.batch_norm)
+            h = tf.reshape(h, [-1, w, w, f_dim * c])
 
-def base_generator(model, z, reuse=False):
-    if model.dataset_name == 'mnist':
-        n_layer = 2
-    else:
-        n_layer = 4
+            for i in range(n_layer - 1):
+                w *= 2
+                c /= 2
+                h = slim.conv2d_transpose(h, gf_dim * c, 4, 2, activation_fn=tf.nn.relu, normalizer_fn=slim.batch_norm)
 
-    bs = model.batch_size
-    w_start = model.image_shape[0]/2**(n_layer)
-    c_start = model.c_dim * 2**(n_layer)
-
-    with tf.variable_scope('g_') as scope:
-        if reuse:
-            scope.reuse_variables()
-
-        h = slim.fully_connected(h, w_start*w_start*c_start, activation_fn=tf.nn.relu, normalizer_fn=slim.batch_norm)
-        h = tf.reshape(h, [-1, w_start, w_start, c_start])
-
-        for i in range(1, n_layer):
-            out_shape = [model.batch_size]+[w_start*2**i]*2+[c_start/2**i]
-            h = slim.conv2d_transpose(h, c, 4, 2, activation_fn=tf.nn.relu, normalizer_fn=slim.batch_norm)
-            h = slim.conv2d(h, c, [3, 3], 1, activation_fn=tf.nn.relu, normalizer_fn=slim.batch_norm)
-
-        i += 1
-        c = c_start*2**i
-        h = slim.conv2d_transpose(h, c, 4, 2, activation_fn=tf.nn.relu, normalizer_fn=slim.batch_norm)
-        x = slim.conv2d(h, c, [3, 3], 1, activation_fn=tf.nn.tanh, normalizer_fn=slim.batch_norm)
+            x = slim.conv2d_transpose(h, c_dim, 4, 2, activation_fn=tf.nn.tanh, normalizer_fn=None)
 
     return x
 

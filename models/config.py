@@ -53,6 +53,8 @@ class Config(object):
             self.image_shape=[28, 28, 1]
             self.c_dim=1
             self.z_dim=100
+            self.f_dim = 64
+            self.fc_dim = 1024
 
         elif FLAGS.dataset == "celebA":
             self.noise_stddev = 0.3
@@ -62,6 +64,8 @@ class Config(object):
             self.image_shape=[64, 64, 3]
             self.c_dim=3
             self.z_dim=256 # 256, 10
+            self.f_dim = 64
+            self.fc_dim = 1024
 
         elif FLAGS.dataset == "cifar10":
             self.noise_stddev = 0.3
@@ -71,6 +75,8 @@ class Config(object):
             self.image_shape=[32, 32, 3]
             self.c_dim=3
             self.z_dim=512 # 256, 10
+            self.f_dim = 64
+            self.fc_dim = 1024
 
         self.sample_size=10*self.batch_size
 

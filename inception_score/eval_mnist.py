@@ -4,15 +4,14 @@ import os
 from IPython import embed
 
 exps = [
-    'ICCV2017/samples/EXP38/dcgan/mnist/noise/1490076837',
+    '0/1490076837',
 ]
 maxs = []
 
 for exp in exps:
-    #base_dir = '/data/whyjay/NIPS2017/'
-    base_dir = '/data/whyjay/'
+    base_dir = '../samples'
 
-    sample_dir = base_dir + exp
+    sample_dir = os.path.join(base_dir, exp)
     samples = sorted(list(set([int(s.split('_')[-1][:-4]) for s in os.listdir(sample_dir) if 'samples' in s])))[:100]
     print "num samples : %d" % (len(samples))
     print sample_dir
@@ -20,7 +19,6 @@ for exp in exps:
     mean_stddev = np.zeros((len(samples),2))
     preds = []
     for i, s in enumerate(samples):
-        #with open(sample_dir + '/samples_rec_%d.npy'%s) as f:
         with open(sample_dir + '/samples_%d.npy'%s) as f:
             images = np.load(f)
         images = np.split(images, images.shape[0])

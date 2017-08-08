@@ -26,8 +26,8 @@ def train(model, sess):
 
             # D step
             image, label = dataset.next_batch(model.batch_size)
-            _, loss_real, loss_fake, summary = sess.run(
-                [d_optim, model.loss_real, model.loss_fake, merged_sum],
+            _, d_real, d_fake, summary = sess.run(
+                [d_optim, model.d_real, model.d_fake, merged_sum],
                 feed_dict={model.image:image, model.label:label})
             model.writer.add_summary(summary, idx)
             '''
@@ -41,7 +41,7 @@ def train(model, sess):
                                         feed_dict={model.image:image, model.label:label})
             model.writer.add_summary(summary, idx)
 
-            # save checkpoint
+            # save checkpoint for every epoch
             if (idx*model.batch_size) % N < model.batch_size:
                 epoch = int(idx*model.batch_size/N)
                 print_time = time.time()
@@ -50,7 +50,7 @@ def train(model, sess):
                 _save_samples(model, sess, epoch)
                 model.save(sess, model.checkpoint_dir, epoch)
 
-                print '[Epoch %(epoch)d] time: %(total_time)4.4f, loss_real: %(loss_real).8f, loss_fake: %(loss_fake).8f, sec_per_epoch: %(sec_per_epoch)4.4f' % locals()
+                print '[Epoch %(epoch)d] time: %(total_time)4.4f, d_real: %(d_real).8f, d_fake: %(d_fake).8f, sec_per_epoch: %(sec_per_epoch)4.4f' % locals()
 
     except tf.errors.OutOfRangeError:
         print "Done training; epoch limit reached."
