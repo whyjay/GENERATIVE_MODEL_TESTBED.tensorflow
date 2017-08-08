@@ -16,8 +16,8 @@ flags.DEFINE_string("load_cp_dir", '', "cp path")
 flags.DEFINE_string("dataset", "mnist", "[mnist, cifar10]")
 flags.DEFINE_string("loss", "jsd", "[mnist, cifar10]")
 flags.DEFINE_boolean("is_train", True, "True for training, False for testing [False]")
-flags.DEFINE_string("generator", 'base_generator', '')
-flags.DEFINE_string("discriminator", 'base_discriminator', '')
+flags.DEFINE_string("generator", 'dcgan', '')
+flags.DEFINE_string("discriminator", 'dcgan', '')
 
 FLAGS = flags.FLAGS
 
