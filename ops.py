@@ -142,10 +142,10 @@ def masked_relu(x, name="ignored"):
     return tf.nn.relu(first_half) * tf.nn.sigmoid(second_half)
 
 def make_z(shape, minval=-1.0, maxval=1.0, name="z"):
-    #z = tf.random_uniform(shape,
-    #                    minval=minval, maxval=maxval,
-    #                    name=name, dtype=tf.float32)
-    z = tf.random_normal(shape, name=name, stddev=0.5, dtype=tf.float32)
+    z = tf.random_uniform(shape,
+                        minval=minval, maxval=maxval,
+                        name=name, dtype=tf.float32)
+    #z = tf.random_normal(shape, name=name, stddev=0.5, dtype=tf.float32)
     return z
 
 def get_sample_zs(model):
