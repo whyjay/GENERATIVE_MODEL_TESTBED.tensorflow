@@ -84,9 +84,6 @@ def generate_grid_images(model, sess):
     coord.join(threads)
     sess.close()
 
-def generate(model, z):
-
-
 def _save_samples(model, sess, epoch):
     samples = []
     noises = []
