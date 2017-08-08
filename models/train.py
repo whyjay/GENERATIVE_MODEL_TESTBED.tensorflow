@@ -69,7 +69,7 @@ def generate_grid_images(model, sess):
     d_optim, g_optim = model.build_model()
     coord, threads, merged_sum = init_training(model, sess)
     grid_size = 100
-    samples = np.zeros(grid_size, grid_size, 28, 28, 1)
+    samples = np.zeros(grid_size, grid_size, grid_size, 28, 28, 1)
 
     for i, y in enumerate(np.arange(-1., 1., 1./grid_size)):
         for j, x in enumerate(np.arange(1., -1., 1./grid_size)):
