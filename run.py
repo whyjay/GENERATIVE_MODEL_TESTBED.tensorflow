@@ -37,6 +37,7 @@ def main(_):
             model.load(FLAGS.load_cp_dir)
 
         train(model, sess)
+        #generate_grid_images(model, sess)
 
         #OPTION = 2
         #visualize(sess, gan, FLAGS, OPTION)

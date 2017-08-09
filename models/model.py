@@ -99,8 +99,8 @@ class GAN(object):
 
         # optimizer
         self.get_vars()
-        d_opt = tf.train.RMSPropOptimizer(config.discriminator_learning_rate)
-        g_opt = tf.train.RMSPropOptimizer(config.generator_learning_rate)
+        d_opt = tf.train.AdamOptimizer(config.discriminator_learning_rate, beta1=0.5)
+        g_opt = tf.train.AdamOptimizer(config.generator_learning_rate, beta1=0.5)
         d_optimize = slim.learning.create_train_op(d_loss, d_opt, variables_to_train=self.d_vars)
         g_optimize = slim.learning.create_train_op(g_loss, g_opt, variables_to_train=self.g_vars)
 
@@ -119,9 +119,9 @@ class GAN(object):
 
     def get_loss(self, d_out_real, d_out_fake, loss='jsd'):
         sigm_ce = tf.nn.sigmoid_cross_entropy_with_logits
-        loss_real = - tf.reduce_mean(sigm_ce(logits=d_out_real, labels=tf.ones_like(d_out_real)))
-        loss_fake = - tf.reduce_mean(sigm_ce(logits=d_out_fake, labels=tf.zeros_like(d_out_fake)))
-        loss_fake_ = - tf.reduce_mean(sigm_ce(logits=d_out_fake, labels=tf.ones_like(d_out_fake)))
+        loss_real = tf.reduce_mean(sigm_ce(logits=d_out_real, labels=tf.ones_like(d_out_real)))
+        loss_fake = tf.reduce_mean(sigm_ce(logits=d_out_fake, labels=tf.zeros_like(d_out_fake)))
+        loss_fake_ = tf.reduce_mean(sigm_ce(logits=d_out_fake, labels=tf.ones_like(d_out_fake)))
 
         if loss == 'jsd':
             d_loss = loss_real + loss_fake
