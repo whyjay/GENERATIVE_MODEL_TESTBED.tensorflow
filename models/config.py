@@ -24,7 +24,10 @@ class Config(object):
         self.add_noise = True
         self.noise_stddev = 0.1
 
-        timestamp = datetime.datetime.now().strftime("%Y-%m-%d-%H:%M:%S")
+        # Learning rate
+        self.learning_rate=0.0002
+
+        timestamp = datetime.datetime.now().strftime("%Y-%m-%d-%H:%M:%S")+str(self.learning_rate)
 
         self.epoch = FLAGS.epoch
         self.log_dir = os.path.join('logs', self.exp_num, timestamp)
@@ -40,9 +43,6 @@ class Config(object):
 
         self.loss = FLAGS.loss
 
-        # Learning rate
-        self.generator_learning_rate=0.0002
-        self.discriminator_learning_rate=0.0002
 
 
         if FLAGS.dataset == "mnist":

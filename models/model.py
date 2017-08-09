@@ -38,7 +38,7 @@ class GAN(object):
 
     def save(self, sess, checkpoint_dir, step):
         model_name = "GAN.model"
-        model_dir = "%s_%s_%s" % (self.batch_size, self.config.generator_learning_rate, self.config.discriminator_learning_rate)
+        model_dir = "%s_%s" % (self.batch_size, self.config.learning_rate)
         checkpoint_dir = os.path.join(checkpoint_dir, model_dir)
 
         if not os.path.exists(checkpoint_dir):
@@ -51,7 +51,7 @@ class GAN(object):
     def load(self, sess, checkpoint_dir):
         print(" [*] Reading checkpoints...")
 
-        model_dir = "%s_%s_%s" % (self.batch_size, self.config.generator_learning_rate, self.config.discriminator_learning_rate)
+        model_dir = "%s_%s" % (self.batch_size, self.config.learning_rate)
         checkpoint_dir = os.path.join(checkpoint_dir, model_dir)
 
         ckpt = tf.train.get_checkpoint_state(checkpoint_dir)
@@ -99,10 +99,10 @@ class GAN(object):
 
         # optimizer
         self.get_vars()
-        d_opt = tf.train.AdamOptimizer(config.discriminator_learning_rate, beta1=0.5)
-        g_opt = tf.train.AdamOptimizer(config.generator_learning_rate, beta1=0.5)
-        # d_opt = tf.train.AdamOptimizer(config.discriminator_learning_rate)
-        # g_opt = tf.train.AdamOptimizer(config.generator_learning_rate)
+        d_opt = tf.train.AdamOptimizer(config.learning_rate, beta1=0.5)
+        g_opt = tf.train.AdamOptimizer(config.learning_rate, beta1=0.5)
+        # d_opt = tf.train.AdamOptimizer(config.learning_rate)
+        # g_opt = tf.train.AdamOptimizer(config.learning_rate)
         d_optimize = slim.learning.create_train_op(d_loss, d_opt, variables_to_train=self.d_vars)
         g_optimize = slim.learning.create_train_op(g_loss, g_opt, variables_to_train=self.g_vars)
 
