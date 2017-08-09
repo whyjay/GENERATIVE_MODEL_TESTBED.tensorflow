@@ -1,7 +1,5 @@
 import tensorflow as tf
 from ops import *
-slim = tf.contrib.slim
-
 from IPython import embed
 
 def dcgan_g(model, z, reuse=False):
@@ -16,26 +14,26 @@ def dcgan_g(model, z, reuse=False):
             n_layer = 2
             w = model.image_shape[0]
 
-            h = slim.fully_connected(z, fc_dim, activation_fn=tf.nn.relu, normalizer_fn=slim.batch_norm)
-            h = slim.fully_connected(h, f_dim*2*(w/4)*(w/4), activation_fn=tf.nn.relu, normalizer_fn=slim.batch_norm)
+            h = fc(z, fc_dim)
+            h = fc(h, f_dim*2*w/4*w/4)
             h = tf.reshape(h, [-1, w/4, w/4, f_dim*2])
-            h = slim.conv2d_transpose(h, f_dim*2, 4, 2, activation_fn=tf.nn.relu, normalizer_fn=slim.batch_norm)
-            x = slim.conv2d_transpose(h, c_dim, 4, 2, activation_fn=tf.nn.sigmoid, normalizer_fn=None)
+            h = deconv2d(h, f_dim*2, 4, 2)
+            x = deconv2d(h, c_dim, 4, 2, act=tf.nn.sigmoid, norm=None)
 
         else:
             n_layer = 4
             c = 2**(n_layer - 1)
             w = model.image_shape[0]/2**(n_layer)
 
-            h = slim.fully_connected(z, f_dim * c * w * w, activation_fn=tf.nn.relu, normalizer_fn=slim.batch_norm)
+            h = fc(z, f_dim * c * w * w)
             h = tf.reshape(h, [-1, w, w, f_dim * c])
 
             for i in range(n_layer - 1):
                 w *= 2
                 c /= 2
-                h = slim.conv2d_transpose(h, gf_dim * c, 4, 2, activation_fn=tf.nn.relu, normalizer_fn=slim.batch_norm)
+                h = deconv2d(h, gf_dim * c, 4, 2)
 
-            x = slim.conv2d_transpose(h, c_dim, 4, 2, activation_fn=tf.nn.tanh, normalizer_fn=None)
+            x = deconv2d(h, c_dim, 4, 2, act=tf.nn.tanh, norm=None)
 
     return x
 

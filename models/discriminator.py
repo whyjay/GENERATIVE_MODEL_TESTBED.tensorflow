@@ -1,8 +1,6 @@
 import tensorflow as tf
 import numpy as np
 from ops import *
-slim = tf.contrib.slim
-
 from IPython import embed
 
 def dcgan_d(model, x, reuse=False):
@@ -15,28 +13,24 @@ def dcgan_d(model, x, reuse=False):
 
         if model.dataset_name == 'mnist':
             w = model.image_shape[0]
-            h = slim.conv2d(x, f_dim, 3, 1, activation_fn=lrelu, normalizer_fn=None)
-            h = slim.conv2d(h, f_dim*2, 3, 1, activation_fn=lrelu, normalizer_fn=slim.batch_norm)
+            h = conv2d(x, f_dim, 3, 1, act=lrelu, norm=None)
+            h = conv2d(h, f_dim*2, 3, 1, act=lrelu)
             h = tf.reshape(h, [bs, -1])
-            h = slim.fully_connected(h, fc_dim, activation_fn=lrelu, normalizer_fn=slim.batch_norm)
+            h = fc(h, fc_dim, act=lrelu)
 
         else:
             n_layer = 4
             c = 1
             w = model.image_shape[0]/2**(n_layer)
 
-            h = slim.conv2d(x, f_dim * c, 4, 2, activation_fn=lrelu, normalizer_fn=None)
+            h = conv2d(x, f_dim * c, 4, 2, act=lrelu, norm=None)
             for i in range(n_layer - 1):
                 w /= 2
                 c *= 2
-                h = slim.conv2d(h, f_dim * c, 4, 2, activation_fn=lrelu, normalizer_fn=slim.batch_norm)
+                h = conv2d(h, f_dim * c, 4, 2, act=lrelu)
 
             h = tf.reshape(h, [bs, -1])
 
-        logits = slim.fully_connected(h, 1, activation_fn=None)
+        logits = fc(h, 1, act=None, norm=None)
         probs = tf.nn.sigmoid(logits)
     return probs, logits
-
-
-
-

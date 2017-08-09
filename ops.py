@@ -7,6 +7,7 @@ from tensorflow.python.framework import ops
 
 from utils import *
 
+slim = tf.contrib.slim
 rng = np.random.RandomState([2016, 6, 1])
 
 def conv_cond_concat(x, y):
@@ -178,5 +179,15 @@ def batch_to_grid(images, width=4):
         grid = tf.expand_dims(grid, axis=-1)
 
     return grid
+
+def fc(x, out_dim, act=tf.nn.relu, norm=slim.batch_norm, init=tf.truncated_normal_initializer(stddev=0.02)):
+    return slim.fully_connected(
+        x, out_dim, activation_fn=act, normalizer_fn=norm, weights_initializer=init)
+
+def deconv2d(x, out_dim, k=4, s=2, act=tf.nn.relu, norm=slim.batch_norm, init=tf.truncated_normal_initializer(stddev=0.02)):
+    return slim.conv2d_transpose(x, out_dim, k, s, activation_fn=act, normalizer_fn=norm, weights_initializer=init)
+
+def conv2d(x, out_dim, k=4, s=2, act=tf.nn.relu, norm=slim.batch_norm, init=tf.truncated_normal_initializer(stddev=0.02)):
+    return slim.conv2d(x, out_dim, k, s, activation_fn=act, normalizer_fn=norm, weights_initializer=init)
 
 

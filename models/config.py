@@ -1,5 +1,6 @@
 import os
 import time
+import datetime
 from glob import glob
 import tensorflow as tf
 
@@ -15,7 +16,6 @@ from IPython import embed
 
 class Config(object):
     def __init__(self, FLAGS):
-        timestamp = str(int(time.time()))
         self.exp_num = str(FLAGS.exp)
         self.dataset = FLAGS.dataset
         self.dataset_path = os.path.join("./dataset/", self.dataset)
@@ -24,7 +24,7 @@ class Config(object):
         self.add_noise = True
         self.noise_stddev = 0.1
 
-        timestamp = str(int(time.time()))
+        timestamp = datetime.datetime.now().strftime("%Y-%m-%d-%H:%M:%S")
 
         self.epoch = FLAGS.epoch
         self.log_dir = os.path.join('logs', self.exp_num, timestamp)
