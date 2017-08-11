@@ -32,5 +32,4 @@ def dcgan_d(model, x, reuse=False):
             h = tf.reshape(h, [bs, -1])
 
         logits = fc(h, 1, act=None, norm=None)
-        probs = tf.nn.sigmoid(logits)
-    return probs, logits
+    return logits
