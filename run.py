@@ -38,8 +38,6 @@ def main(_):
 
         train(model, sess)
         #generate_grid_images(model, sess)
-
-        #OPTION = 2
         #visualize(sess, gan, FLAGS, OPTION)
 
 if __name__ == '__main__':
