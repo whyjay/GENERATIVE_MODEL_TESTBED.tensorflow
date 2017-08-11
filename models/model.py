@@ -101,8 +101,6 @@ class GAN(object):
         self.get_vars()
         d_opt = tf.train.AdamOptimizer(config.learning_rate, beta1=0.5)
         g_opt = tf.train.AdamOptimizer(config.learning_rate, beta1=0.5)
-        # d_opt = tf.train.AdamOptimizer(config.learning_rate)
-        # g_opt = tf.train.AdamOptimizer(config.learning_rate)
         d_optimize = slim.learning.create_train_op(d_loss, d_opt, variables_to_train=self.d_vars)
         g_optimize = slim.learning.create_train_op(g_loss, g_opt, variables_to_train=self.g_vars)
 
