@@ -215,7 +215,8 @@ def read_data_sets(train_dir,
   for i in range(1, 6):
     with open(os.path.join(train_dir, 'cifar-10-batches-py', 'data_batch_%d'%i)) as f:
       batch = numpy.load(f)
-      train_images.append(batch['data'].reshape([-1, 32, 32, 3]))
+      tmp_images = batch['data'].reshape([-1, 3, 32, 32])
+      train_images.append(tmp_images.transpose([0, 2, 3, 1]))
       train_labels += batch['labels']
   train_images = numpy.concatenate(train_images)
   train_labels = numpy.array(train_labels)
