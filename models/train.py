@@ -50,6 +50,7 @@ def train(model, sess):
                 total_time = print_time - start_time
                 sec_per_epoch = (print_time - start_time) / epoch
 
+                image, label = dataset.next_batch(model.batch_size)
                 summary = sess.run([merged_sum], feed_dict={model.image:image, model.label:label, model.z:get_z(model)})
                 model.writer.add_summary(summary, idx)
 
