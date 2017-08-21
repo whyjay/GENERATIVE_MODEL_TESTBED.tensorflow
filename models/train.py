@@ -29,10 +29,9 @@ def train(model, sess):
             # _, d_real, d_fake, summary = sess.run(
                 # [d_optim, model.d_real, model.d_fake, merged_sum],
                 # feed_dict={model.image:image, model.label:label})
-            _, d_real, d_fake, summary = sess.run(
-                [d_optim, model.d_real, model.d_fake, merged_sum],
+            _, d_real, d_fake = sess.run(
+                [d_optim, model.d_real, model.d_fake],
                 feed_dict={model.image:image, model.label:label, model.z:get_z(model)})
-            model.writer.add_summary(summary, idx)
             '''
             # Wasserstein
             _ = sess.run([model.clip_d_op])
@@ -42,9 +41,7 @@ def train(model, sess):
             image, label = dataset.next_batch(model.batch_size)
             # _, summary = sess.run([g_optim, merged_sum],
                                         # feed_dict={model.image:image, model.label:label})
-            _, summary = sess.run([g_optim, merged_sum],
-                                  feed_dict={model.image:image, model.label:label, model.z:get_z(model)})
-            model.writer.add_summary(summary, idx)
+            _ = sess.run([g_optim], feed_dict={model.image:image, model.label:label, model.z:get_z(model)})
 
             # save checkpoint for every epoch
             if (idx*model.batch_size) % N < model.batch_size:
@@ -52,6 +49,10 @@ def train(model, sess):
                 print_time = time.time()
                 total_time = print_time - start_time
                 sec_per_epoch = (print_time - start_time) / epoch
+
+                summary = sess.run([merged_sum], feed_dict={model.image:image, model.label:label, model.z:get_z(model)})
+                model.writer.add_summary(summary, idx)
+
                 _save_samples(model, sess, epoch)
                 model.save(sess, model.checkpoint_dir, epoch)
 
