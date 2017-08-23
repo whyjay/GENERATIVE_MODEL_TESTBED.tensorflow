@@ -60,7 +60,7 @@ class Config(object):
             self.y_dim=10
             self.image_shape=[40, 40, 1]
             self.c_dim=1
-            self.z_dim=100
+            self.z_dim=128
             self.f_dim = 64
             self.fc_dim = 1024
 
