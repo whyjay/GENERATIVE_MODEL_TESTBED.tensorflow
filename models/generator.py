@@ -20,20 +20,38 @@ def dcgan_g(model, z, reuse=False):
             h = deconv2d(h, f_dim*2, 4, 2)
             x = deconv2d(h, c_dim, 4, 2, act=tf.nn.sigmoid, norm=None)
 
-        else:
-            n_layer = 4
+        elif model.dataset_name == 'affmnist':
+            n_layer = 3
             c = 2**(n_layer - 1)
             w = model.image_shape[0]/2**(n_layer)
 
-            h = fc(z, f_dim * c * w * w)
+            h = fc(z, f_dim * c * w * w, act=lrelu)
             h = tf.reshape(h, [-1, w, w, f_dim * c])
 
             for i in range(n_layer - 1):
                 w *= 2
                 c /= 2
-                h = deconv2d(h, gf_dim * c, 4, 2)
+                h = deconv2d(h, f_dim * c, 4, 2)
+                h = deconv2d(h, f_dim * c, 1, 1)
+
+            x = deconv2d(h, c_dim, 4, 2, act=tf.nn.sigmoid, norm=None)
+
+        else:
+            n_layer = 4
+            c = 2**(n_layer - 1)
+            w = model.image_shape[0]/2**(n_layer)
+
+            h = fc(z, f_dim * c * w * w, act=lrelu)
+            h = tf.reshape(h, [-1, w, w, f_dim * c])
+
+            for i in range(n_layer - 1):
+                w *= 2
+                c /= 2
+                h = deconv2d(h, f_dim * c, 4, 2)
+                h = deconv2d(h, f_dim * c, 1, 1)
 
             x = deconv2d(h, c_dim, 4, 2, act=tf.nn.tanh, norm=None)
+
 
     return x
 

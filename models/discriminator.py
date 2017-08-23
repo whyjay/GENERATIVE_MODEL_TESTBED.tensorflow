@@ -18,6 +18,22 @@ def dcgan_d(model, x, reuse=False):
             h = tf.reshape(h, [bs, -1])
             h = fc(h, fc_dim, act=lrelu)
 
+        elif model.dataset_name == 'affmnist':
+            n_layer = 3
+            c = 1
+            w = model.image_shape[0]/2**(n_layer)
+
+            h = conv2d(x, f_dim * c, 4, 2, act=lrelu, norm=None)
+            for i in range(n_layer - 1):
+                w /= 2
+                c *= 2
+                h = conv2d(h, f_dim * c, 4, 2, act=lrelu)
+                h = conv2d(h, f_dim * c, 1, 1, act=lrelu)
+
+                if i == n_layer - 2:
+                    feats = h
+
+            h = tf.reshape(h, [bs, -1])
         else:
             n_layer = 4
             c = 1
@@ -28,6 +44,10 @@ def dcgan_d(model, x, reuse=False):
                 w /= 2
                 c *= 2
                 h = conv2d(h, f_dim * c, 4, 2, act=lrelu)
+                h = conv2d(h, f_dim * c, 1, 1, act=lrelu)
+
+                if i == n_layer - 2:
+                    feats = h
 
             h = tf.reshape(h, [bs, -1])
 
