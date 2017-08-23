@@ -36,6 +36,8 @@ class GAN(object):
         self.dataset_path = config.dataset_path
         self.checkpoint_dir = config.checkpoint_dir
 
+        self.use_augmentation = config.use_augmentation
+
     def save(self, sess, checkpoint_dir, step):
         model_name = "GAN.model"
         model_dir = "%s_%s" % (self.batch_size, self.config.learning_rate)
@@ -83,11 +85,7 @@ class GAN(object):
         self.image = tf.placeholder(tf.float32, shape=[self.batch_size]+self.image_shape)
         self.label = tf.placeholder(tf.float32, shape=[self.batch_size])
         self.z = tf.placeholder(tf.float32, shape=[self.batch_size, self.z_dim])
-
-        if self.dataset_name == 'mnist':
-            image = tf.divide(self.image, 255., name=None)
-        else:
-            image = tf.subtract(tf.divide(self.image, 255./2, name=None), 1)
+        image = preprocess_image(self.image, self.dataset_name, self.use_augmentation)
 
         #self.z = make_z(shape=[self.batch_size, self.z_dim])
 

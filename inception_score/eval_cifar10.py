@@ -4,7 +4,6 @@ import os
 from IPython import embed
 
 exps = [
-    'samples/EXP40/cifar10/noise/1491279930',
 ]
 maxs = []
 

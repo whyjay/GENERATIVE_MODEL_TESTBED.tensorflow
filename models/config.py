@@ -20,12 +20,13 @@ class Config(object):
         self.dataset = FLAGS.dataset
         self.dataset_path = os.path.join("./dataset/", self.dataset)
         self.devices = ["gpu:0", "gpu:1", "gpu:2", "gpu:3"]
+        self.use_augmentation = FLAGS.use_augmentation
+        self.batch_size = FLAGS.batch_size
+        self.learning_rate = FLAGS.learning_rate
 
         self.add_noise = True
         self.noise_stddev = 0.1
 
-        # Learning rate
-        self.learning_rate=0.0002
 
         timestamp = datetime.datetime.now().strftime("%Y-%m-%d-%H:%M:%S")+str(self.learning_rate)
 
@@ -47,10 +48,17 @@ class Config(object):
 
         if FLAGS.dataset == "mnist":
             self.noise_stddev = 0.1
-            self.batch_size=64
             self.y_dim=10
-            self.image_size=28
             self.image_shape=[28, 28, 1]
+            self.c_dim=1
+            self.z_dim=100
+            self.f_dim = 64
+            self.fc_dim = 1024
+
+        elif FLAGS.dataset == "affmnist":
+            self.noise_stddev = 0.1
+            self.y_dim=10
+            self.image_shape=[40, 40, 1]
             self.c_dim=1
             self.z_dim=100
             self.f_dim = 64
@@ -58,9 +66,7 @@ class Config(object):
 
         elif FLAGS.dataset == "celebA":
             self.noise_stddev = 0.3
-            self.batch_size=64
             self.y_dim=1
-            self.image_size=64
             self.image_shape=[64, 64, 3]
             self.c_dim=3
             self.z_dim=256 # 256, 10
@@ -69,9 +75,7 @@ class Config(object):
 
         elif FLAGS.dataset == "cifar10":
             self.noise_stddev = 0.3
-            self.batch_size=64
             self.y_dim=10
-            self.image_size=32
             self.image_shape=[32, 32, 3]
             self.c_dim=3
             self.z_dim=512 # 256, 10

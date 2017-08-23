@@ -12,10 +12,13 @@ from IPython import embed
 flags = tf.app.flags
 flags.DEFINE_integer("epoch", 1000000, "Max epoch to train")
 flags.DEFINE_string("exp", 0, "Experiment number")
-flags.DEFINE_string("load_cp_dir", '', "cp path")
-flags.DEFINE_string("dataset", "mnist", "[mnist, cifar10]")
-flags.DEFINE_string("loss", "jsd", "[mnist, cifar10]")
+flags.DEFINE_string("batch_size", 64, "Batch size")
+flags.DEFINE_string("learning_rate", 0.0002, "Learning rate")
+flags.DEFINE_string("load_cp_dir", '', "checkpoint path")
+flags.DEFINE_string("dataset", "mnist", "[mnist, affmnist, cifar10]")
+flags.DEFINE_string("loss", "jsd", "[jsd, alternative, reverse_kl]")
 flags.DEFINE_boolean("is_train", True, "True for training, False for testing [False]")
+flags.DEFINE_boolean("use_augmentation", True, "Normalization and random brightness/contrast")
 flags.DEFINE_string("generator", 'dcgan_g', '')
 flags.DEFINE_string("discriminator", 'dcgan_d', '')
 

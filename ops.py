@@ -191,3 +191,14 @@ def conv2d(x, out_dim, k=4, s=2, act=tf.nn.relu, norm=slim.batch_norm, init=tf.t
     return slim.conv2d(x, out_dim, k, s, activation_fn=act, normalizer_fn=norm, weights_initializer=init)
 
 
+def preprocess_image(image, dataset, use_augmentation=False):
+    image = tf.divide(image, 255., name=None)
+    if use_augmentation:
+        image = tf.image.random_brightness(image, max_delta=16. / 255.)
+        image = tf.image.random_contrast(image, lower=0.9, upper=1.1)
+    image = tf.minimum(tf.maximum(image, 0.0), 1.0)
+
+    if 'mnist' not in dataset:
+        image = tf.subtract(tf.divide(image, 255./2, name=None), 1)
+
+    return image

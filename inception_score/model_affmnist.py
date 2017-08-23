@@ -18,7 +18,7 @@ import math
 import sys
 slim = tf.contrib.slim
 
-MODEL_DIR = 'checkpoints'
+MODEL_DIR = 'affmnist_checkpoints'
 softmax = None
 x = None
 
@@ -73,13 +73,13 @@ def _init_model():
         os.makedirs(MODEL_DIR)
 
     # Works with an arbitrary minibatch size.
-    x = tf.placeholder(tf.float32, shape=[None, 28, 28, 1])
+    x = tf.placeholder(tf.float32, shape=[None, 40, 40, 1])
 
     h = slim.conv2d(x, 32, 3, 1, activation_fn=tf.nn.relu, normalizer_fn=None)
     h = tf.nn.max_pool(h, ksize=[1, 2, 2, 1], strides=[1, 2, 2, 1], padding='SAME')
     h = slim.conv2d(h, 64, 3, 1, activation_fn=tf.nn.relu, normalizer_fn=None)
     h = tf.nn.max_pool(h, ksize=[1, 2, 2, 1], strides=[1, 2, 2, 1], padding='SAME')
-    h = tf.reshape(h, [-1, 7*7*64])
+    h = tf.reshape(h, [-1, 10*10*64])
     h = slim.fully_connected(h, 1024, activation_fn=None, normalizer_fn=None)
     h = tf.nn.dropout(h, 1.0)
     logits = slim.fully_connected(h, 10, activation_fn=None, normalizer_fn=None)

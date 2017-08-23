@@ -1,4 +1,4 @@
-import model_mnist as model
+import model_affmnist as model
 import numpy as np
 import os
 from IPython import embed
@@ -27,8 +27,13 @@ for exp in exps:
         if i % 10 == 0:
             print "---------- SCORE in %s ------------" % s
             print "%f, %f"%(mean, stddev)
-        mean_stddev[i,0] = mean
-        mean_stddev[i,1] = stddev
+
+        if np.isnan(mean):
+            mean_stddev[i,0] = -1
+            mean_stddev[i,1] = -1
+        else:
+            mean_stddev[i,0] = mean
+            mean_stddev[i,1] = stddev
         preds.append(pred)
 
     max_idx = mean_stddev[:,0].argmax()

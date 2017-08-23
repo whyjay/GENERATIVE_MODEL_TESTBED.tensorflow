@@ -17,6 +17,9 @@ web/js/gen_layers.js
 
 # checkpoint
 checkpoint
+checkpoints
+inception_score/checkpoints
+inception_score/affmnist_checkpoints
 
 # trash
 .dropbox
