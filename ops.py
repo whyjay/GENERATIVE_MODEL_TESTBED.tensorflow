@@ -221,7 +221,7 @@ def residual_block(x, resample=None, no_dropout=False, labels=None):
         h = conv_mean_pool(h, c_dim, 3, act=None, norm=None, init=None)
         shortcut = conv_mean_pool(x, c_dim, 1, act=None, norm=None, init=None)
     elif resample=='up':
-        h = resize_conv2d(h, 3, c_dim, init=None)
+        h = resize_conv2d(h, c_dim, 3, init=None)
         h = conv2d(h, c_dim, 3, 1, act=None, norm=None, init=None)
         shortcut = resize_conv2d(x, c_dim, 1, act=None, norm=None, init=None)
     elif resample==None:
