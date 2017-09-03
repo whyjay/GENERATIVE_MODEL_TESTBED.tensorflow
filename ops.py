@@ -208,8 +208,10 @@ def conv_mean_pool(x, out_dim, k=3, act=tf.nn.relu, norm=slim.batch_norm, init=t
     return tf.add_n([h[:,::2,::2,:], h[:,1::2,::2,:], h[:,::2,1::2,:], h[:,1::2,1::2,:]]) / 4.
 
 def resize_conv2d(x, out_dim, k=3, scale=2, act=tf.nn.relu, norm=slim.batch_norm, init=tf.truncated_normal_initializer(stddev=0.02)):
-    h, w = x.get_shape().as_list()[1:3]
-    h = tf.image.resize_nearest_neighbor(x, (h*scale, w*scale))
+    # h, w = x.get_shape().as_list()[1:3]
+    # h = tf.image.resize_nearest_neighbor(x, (h*scale, w*scale))
+    h = tf.concat([x, x, x, x], axis=3)
+    h = tf.depth_to_space(h, 2)
     return conv2d(h, out_dim, k=k, s=1, act=act, norm=norm, init=init)
 
 def residual_block(x, resample=None, labels=None, act=tf.nn.relu, init=tf.truncated_normal_initializer(stddev=0.02)):
@@ -221,12 +223,12 @@ def residual_block(x, resample=None, labels=None, act=tf.nn.relu, init=tf.trunca
         h += conv_mean_pool(x, c_dim, 1, act=None, norm=None, init=init)
         h = act(slim.batch_norm(h))
     elif resample=='up':
-        h = resize_conv2d(x, c_dim, 3, init=init)
+        h = resize_conv2d(x, c_dim, 3, act=act, init=init)
         h = conv2d(h, c_dim, 3, 1, act=None, norm=None, init=init)
         h += resize_conv2d(x, c_dim, 1, act=None, norm=None, init=init)
         h = act(slim.batch_norm(h))
     elif resample==None:
-        h = conv2d(x, c_dim, 3, 1, init=init)
+        h = conv2d(x, c_dim, 3, 1, act=act, init=init)
         h = conv2d(h, c_dim, 3, 1, act=None, norm=None, init=init)
         h += x
         h = act(slim.batch_norm(h))
