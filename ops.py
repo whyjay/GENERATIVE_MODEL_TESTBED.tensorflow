@@ -212,22 +212,26 @@ def resize_conv2d(x, out_dim, k=3, scale=2, act=tf.nn.relu, norm=slim.batch_norm
     h = tf.image.resize_nearest_neighbor(x, (h*scale, w*scale))
     return conv2d(h, out_dim, k=k, s=1, act=act, norm=norm, init=init)
 
-def residual_block(x, resample=None, no_dropout=False, labels=None):
+def residual_block(x, resample=None, labels=None, act=tf.nn.relu, init=tf.truncated_normal_initializer(stddev=0.02)):
     c_dim = x.get_shape().as_list()[-1]
 
     if resample=='down':
-        h = conv2d(x, c_dim, 3, 1, init=None)
-        h = conv_mean_pool(h, c_dim, 3, act=None, norm=None, init=None)
-        shortcut = conv_mean_pool(x, c_dim, 1, act=None, norm=None, init=None)
+        h = conv2d(x, c_dim, 3, 1, act=act, init=init)
+        h = conv_mean_pool(h, c_dim, 3, act=None, norm=None, init=init)
+        h += conv_mean_pool(x, c_dim, 1, act=None, norm=None, init=init)
+        h = act(slim.batch_norm(h))
     elif resample=='up':
-        h = resize_conv2d(x, c_dim, 3, init=None)
-        h = conv2d(h, c_dim, 3, 1, act=None, norm=None, init=None)
-        shortcut = resize_conv2d(x, c_dim, 1, act=None, norm=None, init=None)
+        h = resize_conv2d(x, c_dim, 3, init=init)
+        h = conv2d(h, c_dim, 3, 1, act=None, norm=None, init=init)
+        h += resize_conv2d(x, c_dim, 1, act=None, norm=None, init=init)
+        h = act(slim.batch_norm(h))
     elif resample==None:
-        h = conv2d(x, c_dim, 3, 1, init=None)
-        h = conv2d(h, c_dim, 3, 1, act=None, norm=None, init=None)
-        shortcut = x
+        h = conv2d(x, c_dim, 3, 1, init=init)
+        h = conv2d(h, c_dim, 3, 1, act=None, norm=None, init=init)
+        h += x
+        h = act(slim.batch_norm(h))
     else:
         raise Exception('invalid resample value')
 
-    return tf.nn.relu(slim.batch_norm(shortcut + h))
+    return h
+
