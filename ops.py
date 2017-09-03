@@ -214,21 +214,20 @@ def resize_conv2d(x, out_dim, k=3, scale=2, act=tf.nn.relu, norm=slim.batch_norm
 
 def residual_block(x, resample=None, no_dropout=False, labels=None):
     c_dim = x.get_shape().as_list()[-1]
-    h = tf.nn.relu(slim.batch_norm(x))
 
     if resample=='down':
-        h = conv2d(h, c_dim, 3, 1, init=None)
+        h = conv2d(x, c_dim, 3, 1, init=None)
         h = conv_mean_pool(h, c_dim, 3, act=None, norm=None, init=None)
         shortcut = conv_mean_pool(x, c_dim, 1, act=None, norm=None, init=None)
     elif resample=='up':
-        h = resize_conv2d(h, c_dim, 3, init=None)
+        h = resize_conv2d(x, c_dim, 3, init=None)
         h = conv2d(h, c_dim, 3, 1, act=None, norm=None, init=None)
         shortcut = resize_conv2d(x, c_dim, 1, act=None, norm=None, init=None)
     elif resample==None:
-        h = conv2d(h, c_dim, 3, 1, init=None)
+        h = conv2d(x, c_dim, 3, 1, init=None)
         h = conv2d(h, c_dim, 3, 1, act=None, norm=None, init=None)
         shortcut = x
     else:
         raise Exception('invalid resample value')
 
-    return shortcut + h
+    return tf.nn.relu(slim.batch_norm(shortcut + h))
