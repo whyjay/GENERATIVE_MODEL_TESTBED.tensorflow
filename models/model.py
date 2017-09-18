@@ -31,6 +31,8 @@ class GAN(object):
         self.f_dim = config.f_dim
         self.fc_dim = config.fc_dim
         self.z_dim = config.z_dim
+        self.beta1 = config.beta1
+        self.beta2 = config.beta2
 
         self.dataset_name = config.dataset
         self.dataset_path = config.dataset_path
@@ -97,8 +99,8 @@ class GAN(object):
 
         # optimizer
         self.get_vars()
-        d_opt = tf.train.AdamOptimizer(config.learning_rate, beta1=0.5)
-        g_opt = tf.train.AdamOptimizer(config.learning_rate, beta1=0.5)
+        d_opt = tf.train.AdamOptimizer(config.learning_rate, beta1=self.beta1, beta2=self.beta2)
+        g_opt = tf.train.AdamOptimizer(config.learning_rate, beta1=self.beta1, beta2=self.beta2)
         d_optimize = slim.learning.create_train_op(d_loss, d_opt, variables_to_train=self.d_vars)
         g_optimize = slim.learning.create_train_op(g_loss, g_opt, variables_to_train=self.g_vars)
 

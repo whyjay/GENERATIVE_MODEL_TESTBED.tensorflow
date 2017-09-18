@@ -34,6 +34,21 @@ def dcgan_d(model, x, reuse=False):
                     feats = h
 
             h = tf.reshape(h, [bs, -1])
+
+        elif model.dataset_name == 'cifar10':
+            h = conv2d(x, f_dim, 3, 1, act=tf.nn.elu, norm=None)
+            h = conv_mean_pool(h, f_dim, 3, act=None, norm=None)
+            h += conv_mean_pool(x, f_dim, 1, act=None, norm=None)
+            h = tf.nn.elu(ln(h))
+
+            h = residual_block(h, resample='down', act=tf.nn.elu)
+            h = residual_block(h, resample=None, act=tf.nn.elu)
+            h = residual_block(h, resample=None, act=tf.nn.elu)
+
+            h = conv2d(h, f_dim, 4, 2, act=None, norm=ln)
+            h = tf.reduce_mean(h, axis=[1,2])
+            h = tf.reshape(h, [bs, -1])
+
         else:
             n_layer = 4
             c = 1

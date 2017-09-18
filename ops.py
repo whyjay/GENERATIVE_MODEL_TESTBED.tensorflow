@@ -9,6 +9,7 @@ from utils import *
 
 slim = tf.contrib.slim
 rng = np.random.RandomState([2016, 6, 1])
+ln = tf.contrib.layers.layer_norm
 
 def conv_cond_concat(x, y):
     """Concatenate conditioning vector on feature map axis."""
@@ -214,24 +215,24 @@ def resize_conv2d(x, out_dim, k=3, scale=2, act=tf.nn.relu, norm=slim.batch_norm
     h = tf.depth_to_space(h, 2)
     return conv2d(h, out_dim, k=k, s=1, act=act, norm=norm, init=init)
 
-def residual_block(x, resample=None, labels=None, act=tf.nn.relu, init=tf.truncated_normal_initializer(stddev=0.02)):
+def residual_block(x, resample=None, labels=None, act=tf.nn.relu, norm=ln, init=tf.truncated_normal_initializer(stddev=0.02)):
     c_dim = x.get_shape().as_list()[-1]
 
     if resample=='down':
         h = conv2d(x, c_dim, 3, 1, act=act, init=init)
         h = conv_mean_pool(h, c_dim, 3, act=None, norm=None, init=init)
         h += conv_mean_pool(x, c_dim, 1, act=None, norm=None, init=init)
-        h = act(slim.batch_norm(h))
+        h = act(norm(h))
     elif resample=='up':
         h = resize_conv2d(x, c_dim, 3, act=act, init=init)
         h = conv2d(h, c_dim, 3, 1, act=None, norm=None, init=init)
         h += resize_conv2d(x, c_dim, 1, act=None, norm=None, init=init)
-        h = act(slim.batch_norm(h))
+        h = act(norm(h))
     elif resample==None:
         h = conv2d(x, c_dim, 3, 1, act=act, init=init)
         h = conv2d(h, c_dim, 3, 1, act=None, norm=None, init=init)
         h += x
-        h = act(slim.batch_norm(h))
+        h = act(norm(h))
     else:
         raise Exception('invalid resample value')
 

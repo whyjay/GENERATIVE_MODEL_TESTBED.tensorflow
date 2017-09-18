@@ -36,6 +36,20 @@ def dcgan_g(model, z, reuse=False):
 
             x = deconv2d(h, c_dim, 4, 2, act=tf.nn.sigmoid, norm=None)
 
+        elif model.dataset_name == 'cifar10':
+            n_layer = 3
+            w = model.image_shape[0]/2**(n_layer)
+
+            h = fc(z, f_dim * w * w, act=tf.nn.elu, norm=ln)
+            h = tf.reshape(h, [-1, w, w, f_dim])
+
+            c = f_dim
+            for i in range(n_layer):
+                c /= 2
+                h = residual_block(h, resample='up', act=tf.nn.elu)
+
+            x = conv2d(h, c_dim, 3, 1, act=tf.nn.tanh, norm=None)
+
         else:
             n_layer = 4
             c = 2**(n_layer - 1)

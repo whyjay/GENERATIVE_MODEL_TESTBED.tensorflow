@@ -47,40 +47,44 @@ class Config(object):
 
 
         if FLAGS.dataset == "mnist":
-            self.noise_stddev = 0.1
             self.y_dim=10
             self.image_shape=[28, 28, 1]
             self.c_dim=1
             self.z_dim=100
             self.f_dim = 64
             self.fc_dim = 1024
+            self.beta1 = 0.5
+            self.beta2 = 0.999
 
         elif FLAGS.dataset == "affmnist":
-            self.noise_stddev = 0.1
             self.y_dim=10
             self.image_shape=[40, 40, 1]
             self.c_dim=1
             self.z_dim=128
             self.f_dim = 64
             self.fc_dim = 1024
+            self.beta1 = 0.5
+            self.beta2 = 0.999
 
         elif FLAGS.dataset == "celebA":
-            self.noise_stddev = 0.3
             self.y_dim=1
             self.image_shape=[64, 64, 3]
             self.c_dim=3
             self.z_dim=256 # 256, 10
             self.f_dim = 64
             self.fc_dim = 1024
+            self.beta1 = 0.5
+            self.beta2 = 0.999
 
         elif FLAGS.dataset == "cifar10":
-            self.noise_stddev = 0.3
             self.y_dim=10
             self.image_shape=[32, 32, 3]
             self.c_dim=3
-            self.z_dim=512 # 256, 10
-            self.f_dim = 64
+            self.z_dim=128
+            self.f_dim = 128
             self.fc_dim = 1024
+            self.beta1 = 0.
+            self.beta2 = 0.9
 
         self.sample_size=10*self.batch_size
 
