@@ -142,7 +142,6 @@ class DataSet(object):
     self._labels = labels
     self._epochs_completed = 0
     self._index_in_epoch = 0
-    self.move = None
 
   @property
   def images(self):
@@ -172,8 +171,6 @@ class DataSet(object):
           fake_label for _ in xrange(batch_size)
       ]
 
-    if self.move == None:
-        self.move = numpy.zeros((batch_size, 40, 40, 1)) # initialize
 
     start = self._index_in_epoch
     self._index_in_epoch += batch_size
@@ -192,15 +189,16 @@ class DataSet(object):
 
     # edit for moving mnist
     end = self._index_in_epoch
+    move = numpy.zeros((batch_size, 40, 40, 1)) # initialize
 
     for i in range(start, end):
         degree = numpy.random.randint(41) - 20
         h_move = numpy.random.randint(12)
         w_move = numpy.random.randint(12)
         rot = rotate(self._images[i], degree, reshape = False)
-        self.move[i-start][h_move:h_move+28, w_move:w_move+28] = rot
+        move[i-start][h_move:h_move+28, w_move:w_move+28] = rot
 
-    return self.move, self._labels[start:end]
+    return move, self._labels[start:end]
 
 def read_data_sets(train_dir,
                    fake_data=False,
