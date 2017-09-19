@@ -8,6 +8,7 @@ from models.train import train
 from utils import pp, visualize, to_json
 
 from IPython import embed
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
 flags = tf.app.flags
 flags.DEFINE_integer("epoch", 1000000, "Max epoch to train")
