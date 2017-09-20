@@ -17,6 +17,7 @@ from IPython import embed
 class Config(object):
     def __init__(self, FLAGS):
         self.exp_num = str(FLAGS.exp)
+        self.load_cp_dir = FLAGS.load_cp_dir
         self.dataset = FLAGS.dataset
         self.dataset_path = os.path.join("./dataset/", self.dataset)
         self.devices = ["gpu:0", "gpu:1", "gpu:2", "gpu:3"]

@@ -37,9 +37,6 @@ def main(_):
 
     with tf.Session(config=config_proto) as sess:
         model = GAN(config)
-        if FLAGS.load_cp_dir is not '':
-            model.load(FLAGS.load_cp_dir)
-
         train(model, sess)
         #generate_grid_images(model, sess)
         #visualize(sess, gan, FLAGS, OPTION)

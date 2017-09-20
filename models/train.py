@@ -8,6 +8,8 @@ from IPython import embed
 
 def train(model, sess):
     d_optim, g_optim = model.build_model()
+    if not (config.load_cp_dir == ''):
+        model.load(sess, config.load_cp_dir)
     coord, threads, merged_sum = init_training(model, sess)
     start_time = time.time()
     print_time = time.time()
