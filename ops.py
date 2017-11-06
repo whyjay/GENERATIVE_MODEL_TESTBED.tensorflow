@@ -219,17 +219,20 @@ def residual_block(x, resample=None, labels=None, act=tf.nn.relu, norm=ln, init=
     c_dim = x.get_shape().as_list()[-1]
 
     if resample=='down':
-        h = conv2d(x, c_dim, 3, 1, act=act, init=init)
+        h = conv2d(x, c_dim, 3, 1, act=act, init=init, norm=norm)
+        #h = conv2d(x, c_dim, 3, 1, act=act, init=init)
         h = conv_mean_pool(h, c_dim, 3, act=None, norm=None, init=init)
         h += conv_mean_pool(x, c_dim, 1, act=None, norm=None, init=init)
         h = act(norm(h))
     elif resample=='up':
-        h = resize_conv2d(x, c_dim, 3, act=act, init=init)
+        h = resize_conv2d(x, c_dim, 3, act=act, init=init, norm=norm)
+        #h = resize_conv2d(x, c_dim, 3, act=act, init=init)
         h = conv2d(h, c_dim, 3, 1, act=None, norm=None, init=init)
         h += resize_conv2d(x, c_dim, 1, act=None, norm=None, init=init)
         h = act(norm(h))
     elif resample==None:
-        h = conv2d(x, c_dim, 3, 1, act=act, init=init)
+        h = conv2d(x, c_dim, 3, 1, act=act, init=init, norm=norm)
+        #h = conv2d(x, c_dim, 3, 1, act=act, init=init)
         h = conv2d(h, c_dim, 3, 1, act=None, norm=None, init=init)
         h += x
         h = act(norm(h))
