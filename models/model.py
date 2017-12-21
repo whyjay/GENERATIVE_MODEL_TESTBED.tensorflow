@@ -39,6 +39,7 @@ class GAN(object):
         self.checkpoint_dir = config.checkpoint_dir
 
         self.use_augmentation = config.use_augmentation
+        self.is_training = tf.Variable(True, name='is_training', trainable=False)
 
     def save(self, sess, checkpoint_dir, step):
         model_name = "GAN.model"

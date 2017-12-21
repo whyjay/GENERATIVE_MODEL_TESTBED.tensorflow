@@ -7,10 +7,12 @@ from ops import *
 from IPython import embed
 
 def train(model, sess):
+    config = model.config
     d_optim, g_optim = model.build_model()
+
     if not (config.load_cp_dir == ''):
         model.load(sess, config.load_cp_dir)
-    coord, threads, merged_sum = init_training(model, sess)
+    merged_sum = init_training(model, sess)
     start_time = time.time()
     print_time = time.time()
 
@@ -21,70 +23,41 @@ def train(model, sess):
     print "[*] Traing Start : N=%d, Batch=%d, epoch=%d, max_iter=%d" \
         %(N, model.batch_size, model.config.epoch, max_iter)
 
-    try:
-        for idx in xrange(1, max_iter):
-            batch_start_time = time.time()
+    for idx in xrange(1, max_iter):
+        batch_start_time = time.time()
+        sess.run(model.is_training.assign(True))
 
-            # D step
+        # D step
+        image, label = dataset.next_batch(model.batch_size)
+        _, d_real, d_fake = sess.run(
+            [d_optim, model.d_real, model.d_fake],
+            feed_dict={model.image:image, model.label:label, model.z:get_z(model)})
+        '''
+        # Wasserstein
+        _ = sess.run([model.clip_d_op])
+        '''
+
+        # G step
+        image, label = dataset.next_batch(model.batch_size)
+        _ = sess.run([g_optim], feed_dict={model.image:image, model.label:label, model.z:get_z(model)})
+
+        # save checkpoint for every epoch
+        if (idx*model.batch_size) % N < model.batch_size:
+            epoch = int(idx*model.batch_size/N)
+            print_time = time.time()
+            total_time = print_time - start_time
+            sec_per_epoch = (print_time - start_time) / epoch
+
             image, label = dataset.next_batch(model.batch_size)
-            # _, d_real, d_fake, summary = sess.run(
-                # [d_optim, model.d_real, model.d_fake, merged_sum],
-                # feed_dict={model.image:image, model.label:label})
-            _, d_real, d_fake = sess.run(
-                [d_optim, model.d_real, model.d_fake],
-                feed_dict={model.image:image, model.label:label, model.z:get_z(model)})
-            '''
-            # Wasserstein
-            _ = sess.run([model.clip_d_op])
-            '''
+            summary = sess.run([merged_sum], feed_dict={model.image:image, model.label:label, model.z:get_z(model)})
+            model.writer.add_summary(summary, idx)
 
-            # G step
-            image, label = dataset.next_batch(model.batch_size)
-            # _, summary = sess.run([g_optim, merged_sum],
-                                        # feed_dict={model.image:image, model.label:label})
-            _ = sess.run([g_optim], feed_dict={model.image:image, model.label:label, model.z:get_z(model)})
+            sess.run(model.is_training.assign(False))
+            _save_samples(model, sess, epoch)
+            model.save(sess, model.checkpoint_dir, epoch)
 
-            # save checkpoint for every epoch
-            if (idx*model.batch_size) % N < model.batch_size:
-                epoch = int(idx*model.batch_size/N)
-                print_time = time.time()
-                total_time = print_time - start_time
-                sec_per_epoch = (print_time - start_time) / epoch
+            print '[Epoch %(epoch)d] time: %(total_time)4.4f, d_real: %(d_real).8f, d_fake: %(d_fake).8f, sec_per_epoch: %(sec_per_epoch)4.4f' % locals()
 
-                image, label = dataset.next_batch(model.batch_size)
-                summary = sess.run([merged_sum], feed_dict={model.image:image, model.label:label, model.z:get_z(model)})
-                model.writer.add_summary(summary, idx)
-
-                _save_samples(model, sess, epoch)
-                model.save(sess, model.checkpoint_dir, epoch)
-
-                print '[Epoch %(epoch)d] time: %(total_time)4.4f, d_real: %(d_real).8f, d_fake: %(d_fake).8f, sec_per_epoch: %(sec_per_epoch)4.4f' % locals()
-
-    except tf.errors.OutOfRangeError:
-        print "Done training; epoch limit reached."
-    finally:
-        coord.request_stop()
-
-    coord.join(threads)
-    sess.close()
-
-def generate_grid_images(model, sess):
-    d_optim, g_optim = model.build_model()
-    coord, threads, merged_sum = init_training(model, sess)
-    grid_size = 100
-    samples = np.zeros(grid_size, grid_size, grid_size, 28, 28, 1)
-
-    for i, y in enumerate(np.arange(-1., 1., 1./grid_size)):
-        for j, x in enumerate(np.arange(1., -1., 1./grid_size)):
-            z = get_z(model)
-            z[:,0] = y
-            z[:,1] = x
-            samples[i, j, :] = sess.run([model.gen_image], feed_dict={model.z:z})
-
-    with open(os.path.join(model.sample_dir, 'samples_grid_%d.npy'%(epoch)), 'w') as f:
-        np.save(f, samples)
-
-    coord.join(threads)
     sess.close()
 
 def _save_samples(model, sess, epoch):
@@ -119,8 +92,6 @@ def init_training(model, sess):
     merged_sum = tf.summary.merge_all()
     model.writer = tf.summary.FileWriter(config.log_dir, sess.graph)
 
-    coord = tf.train.Coordinator()
-    threads = tf.train.start_queue_runners(coord=coord)
 
     if model.load(sess, model.checkpoint_dir):
         print(" [*] Load SUCCESS")
@@ -129,7 +100,7 @@ def init_training(model, sess):
 
     if not os.path.exists(config.dataset_path):
         print(" [!] Data does not exist : %s" % config.dataset_path)
-    return coord, threads, merged_sum
+    return merged_sum
 
 def load_dataset(model):
     if model.dataset_name == 'mnist':

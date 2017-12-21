@@ -10,6 +10,7 @@ from utils import *
 slim = tf.contrib.slim
 rng = np.random.RandomState([2016, 6, 1])
 ln = tf.contrib.layers.layer_norm
+bn = slim.batch_norm
 
 def conv_cond_concat(x, y):
     """Concatenate conditioning vector on feature map axis."""
@@ -181,15 +182,35 @@ def batch_to_grid(images, width=4):
 
     return grid
 
-def fc(x, out_dim, act=tf.nn.relu, norm=slim.batch_norm, init=tf.truncated_normal_initializer(stddev=0.02)):
-    return slim.fully_connected(
-        x, out_dim, activation_fn=act, normalizer_fn=norm, weights_initializer=init)
+@tf.contrib.framework.add_arg_scope
+def fc(x, out_dim, is_training, act=tf.nn.relu, norm=bn, init=tf.truncated_normal_initializer(stddev=0.02)):#, is_training=False):
+    if norm == bn:
+        return slim.fully_connected(
+            x, out_dim, activation_fn=act, normalizer_fn=norm,
+            weights_initializer=init, normalizer_params={'is_training':is_training})
+    else:
+        return slim.fully_connected(
+            x, out_dim, activation_fn=act, normalizer_fn=norm, weights_initializer=init)
 
-def deconv2d(x, out_dim, k=4, s=2, act=tf.nn.relu, norm=slim.batch_norm, init=tf.truncated_normal_initializer(stddev=0.02)):
-    return slim.conv2d_transpose(x, out_dim, k, s, activation_fn=act, normalizer_fn=norm, weights_initializer=init)
+@tf.contrib.framework.add_arg_scope
+def deconv2d(x, out_dim, k, s, is_training, act=tf.nn.relu, norm=bn, init=tf.truncated_normal_initializer(stddev=0.02)):#, is_training=False):
+    if norm == bn:
+        return slim.conv2d_transpose(
+            x, out_dim, k, s, activation_fn=act, normalizer_fn=norm,
+            weights_initializer=init, normalizer_params={'is_training':is_training})
+    else:
+        return slim.conv2d_transpose(
+            x, out_dim, k, s, activation_fn=act, normalizer_fn=norm, weights_initializer=init)
 
-def conv2d(x, out_dim, k=4, s=2, act=tf.nn.relu, norm=slim.batch_norm, init=tf.truncated_normal_initializer(stddev=0.02)):
-    return slim.conv2d(x, out_dim, k, s, activation_fn=act, normalizer_fn=norm, weights_initializer=init)
+@tf.contrib.framework.add_arg_scope
+def conv2d(x, out_dim, k, s, is_training, act=tf.nn.relu, norm=bn, init=tf.truncated_normal_initializer(stddev=0.02)):#, is_training=False):
+    if norm == bn:
+        return slim.conv2d(
+            x, out_dim, k, s, activation_fn=act, normalizer_fn=norm,
+            weights_initializer=init, normalizer_params={'is_training':is_training})
+    else:
+        return slim.conv2d(
+            x, out_dim, k, s, activation_fn=act, normalizer_fn=norm, weights_initializer=init)
 
 
 def preprocess_image(image, dataset, use_augmentation=False):
@@ -204,11 +225,11 @@ def preprocess_image(image, dataset, use_augmentation=False):
 
     return image
 
-def conv_mean_pool(x, out_dim, k=3, act=tf.nn.relu, norm=slim.batch_norm, init=tf.truncated_normal_initializer(stddev=0.02)):
+def conv_mean_pool(x, out_dim, k=3, act=tf.nn.relu, norm=bn, init=tf.truncated_normal_initializer(stddev=0.02)):
     h = conv2d(x, out_dim, k=k, s=1, act=act, norm=norm, init=init)
     return tf.add_n([h[:,::2,::2,:], h[:,1::2,::2,:], h[:,::2,1::2,:], h[:,1::2,1::2,:]]) / 4.
 
-def resize_conv2d(x, out_dim, k=3, scale=2, act=tf.nn.relu, norm=slim.batch_norm, init=tf.truncated_normal_initializer(stddev=0.02)):
+def resize_conv2d(x, out_dim, k=3, scale=2, act=tf.nn.relu, norm=bn, init=tf.truncated_normal_initializer(stddev=0.02)):
     # h, w = x.get_shape().as_list()[1:3]
     # h = tf.image.resize_nearest_neighbor(x, (h*scale, w*scale))
     h = tf.concat([x, x, x, x], axis=3)
@@ -241,3 +262,4 @@ def residual_block(x, resample=None, labels=None, act=tf.nn.relu, norm=ln, init=
 
     return h
 
+ops_with_bn = [fc, conv2d, deconv2d]
