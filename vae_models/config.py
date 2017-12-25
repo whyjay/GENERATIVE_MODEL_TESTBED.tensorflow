@@ -7,8 +7,8 @@ import tensorflow as tf
 from ops import *
 from utils import *
 
-from models.generator import *
-from models.discriminator import *
+from vae_models.encoder import *
+from vae_models.decoder import *
 #from models.evaluate import evaluate
 from utils import pp, visualize, to_json
 
@@ -24,6 +24,7 @@ class Config(object):
         self.use_augmentation = FLAGS.use_augmentation
         self.batch_size = FLAGS.batch_size
         self.learning_rate = FLAGS.learning_rate
+        self.latent_distribution = FLAGS.latent_distribution
 
         self.add_noise = True
         self.noise_stddev = 0.1
@@ -32,56 +33,54 @@ class Config(object):
         timestamp = datetime.datetime.now().strftime("%Y-%m-%d-%H:%M:%S")+str(self.learning_rate)
 
         self.epoch = FLAGS.epoch
-        self.log_dir = os.path.join('logs', self.exp_num, timestamp)
-        self.checkpoint_dir = os.path.join('checkpoint', self.exp_num, timestamp)
-        self.sample_dir = os.path.join('samples', self.exp_num, timestamp)
+        self.log_dir = os.path.join('logs/vae', self.exp_num, timestamp)
+        self.checkpoint_dir = os.path.join('checkpoint/vae', self.exp_num, timestamp)
+        self.sample_dir = os.path.join('samples/vae', self.exp_num, timestamp)
         self.timestamp = timestamp
 
-        self.generator_name = FLAGS.generator
-        self.discriminator_name = FLAGS.discriminator
+        self.encoder_name = FLAGS.encoder
+        self.decoder_name = FLAGS.decoder
 
-        self.generator_func = globals()[self.generator_name]
-        self.discriminator_func = globals()[self.discriminator_name]
+        self.encoder_func = globals()[self.encoder_name]
+        self.decoder_func = globals()[self.decoder_name]
 
-        self.loss = FLAGS.loss
+        self.kappa = 1
 
-
-
-        if FLAGS.dataset == "mnist":
+        if FLAGS.dataset in ['mnist', 'fashion']:
             self.y_dim=10
             self.image_shape=[28, 28, 1]
             self.c_dim=1
-            self.z_dim=100
+            self.z_dim=20
             self.f_dim = 64
-            self.fc_dim = 1024
+            self.fc_dim = 512
             self.beta1 = 0.5
             self.beta2 = 0.999
 
-        elif FLAGS.dataset == "affmnist":
+        elif FLAGS.dataset == 'affmnist':
             self.y_dim=10
             self.image_shape=[40, 40, 1]
             self.c_dim=1
-            self.z_dim=128
+            self.z_dim=20
             self.f_dim = 64
-            self.fc_dim = 1024
+            self.fc_dim = 512
             self.beta1 = 0.5
             self.beta2 = 0.999
 
-        elif FLAGS.dataset == "celebA":
+        elif FLAGS.dataset == 'celebA':
             self.y_dim=1
             self.image_shape=[64, 64, 3]
             self.c_dim=3
-            self.z_dim=256 # 256, 10
+            self.z_dim=64
             self.f_dim = 64
             self.fc_dim = 1024
             self.beta1 = 0.5
             self.beta2 = 0.999
 
-        elif FLAGS.dataset == "cifar10":
+        elif FLAGS.dataset == 'cifar10':
             self.y_dim=10
             self.image_shape=[32, 32, 3]
             self.c_dim=3
-            self.z_dim=128
+            self.z_dim=64
             self.f_dim = 128
             self.fc_dim = 1024
             self.beta1 = 0.

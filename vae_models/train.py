@@ -8,7 +8,7 @@ from IPython import embed
 
 def train(model, sess):
     config = model.config
-    d_optim, g_optim = model.build_model()
+    train_op = model.build_model()
 
     if not (config.load_cp_dir == ''):
         model.load(sess, config.load_cp_dir)
@@ -27,36 +27,28 @@ def train(model, sess):
         batch_start_time = time.time()
         sess.run(model.is_training.assign(True))
 
-        # D step
         image, label = dataset.next_batch(model.batch_size)
-        _, d_real, d_fake = sess.run(
-            [d_optim, model.d_real, model.d_fake],
-            feed_dict={model.image:image, model.label:label, model.z:get_z(model)})
-        '''
-        # Wasserstein
-        _ = sess.run([model.clip_d_op])
-        '''
-
-        # G step
-        image, label = dataset.next_batch(model.batch_size)
-        _ = sess.run([g_optim], feed_dict={model.image:image, model.label:label, model.z:get_z(model)})
+        _, recon_image, input_image, z, loss_elbo, loss_kl, loss_recon = sess.run(
+            [train_op, model.recon_image, model.input_image, model.z, model.loss_elbo, model.loss_kl, model.loss_recon],
+            feed_dict={model.image:image, model.label:label})
 
         # save checkpoint for every epoch
         if (idx*model.batch_size) % N < model.batch_size:
-            epoch = int(idx*model.batch_size/N)
+            epoch = int(idx*model.batch_size/N)+1
             print_time = time.time()
             total_time = print_time - start_time
             sec_per_epoch = (print_time - start_time) / epoch
 
             image, label = dataset.next_batch(model.batch_size)
-            summary = sess.run([merged_sum], feed_dict={model.image:image, model.label:label, model.z:get_z(model)})
+            summary = sess.run(merged_sum, feed_dict={model.image:image, model.label:label, model.z:get_z(model)})
+
             model.writer.add_summary(summary, idx)
 
             sess.run(model.is_training.assign(False))
             _save_samples(model, sess, epoch)
             model.save(sess, model.checkpoint_dir, epoch)
 
-            print '[Epoch %(epoch)d] time: %(total_time)4.4f, d_real: %(d_real).8f, d_fake: %(d_fake).8f, sec_per_epoch: %(sec_per_epoch)4.4f' % locals()
+            print '[Epoch %(epoch)d] time: %(total_time)4.4f, loss_elbo: %(loss_elbo).4f, loss_kl: %(loss_kl).4f, loss_recon: %(loss_recon).4f, sec_per_epoch: %(sec_per_epoch)4.4f' % locals()
 
     sess.close()
 
@@ -66,9 +58,8 @@ def _save_samples(model, sess, epoch):
 
     # generator hard codes the batch size
     for i in xrange(model.sample_size // model.batch_size):
-        # gen_image, noise = sess.run([model.gen_image, model.z])
-        gen_image, noise = sess.run([model.gen_image, model.z],
-                                    feed_dict={model.z:get_z(model)})
+        noise = get_z(model)
+        gen_image = sess.run(model.gen_image, feed_dict={model.noise:noise})
         samples.append(gen_image)
         noises.append(noise)
 
@@ -92,7 +83,6 @@ def init_training(model, sess):
     merged_sum = tf.summary.merge_all()
     model.writer = tf.summary.FileWriter(config.log_dir, sess.graph)
 
-
     if model.load(sess, model.checkpoint_dir):
         print(" [*] Load SUCCESS")
     else:
@@ -104,11 +94,17 @@ def init_training(model, sess):
 
 def load_dataset(model):
     if model.dataset_name == 'mnist':
-        import mnist
-        return mnist.read_data_sets(model.dataset_path, dtype=tf.uint8, reshape=False, validation_size=0).train
+        import mnist as ds
+    elif model.dataset_name == 'fashion':
+        import fashion as ds
     elif model.dataset_name == 'cifar10':
-        import cifar10
-        return cifar10.read_data_sets(model.dataset_path, dtype=tf.uint8, reshape=False, validation_size=0).train
+        import cifar10 as ds
+    return ds.read_data_sets(model.dataset_path, dtype=tf.uint8, reshape=False, validation_size=0).train
 
 def get_z(model):
-    return np.random.uniform(-1., 1., size=(model.batch_size, model.z_dim))
+    if model.latent_distribution == 'vmf':
+        z = np.random.normal(0., 1., size=(model.batch_size, model.z_dim))
+        return z/np.linalg.norm(z)
+    else:
+        return np.random.normal(0., 1., size=(model.batch_size, model.z_dim))
+
