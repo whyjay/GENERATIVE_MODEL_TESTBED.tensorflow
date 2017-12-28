@@ -42,15 +42,13 @@ class GAN(object):
         self.is_training = tf.Variable(True, name='is_training', trainable=False)
 
     def save(self, sess, checkpoint_dir, step):
-        model_name = "GAN.model"
-        model_dir = "%s_%s" % (self.batch_size, self.config.learning_rate)
-        checkpoint_dir = os.path.join(checkpoint_dir, model_dir)
+        model_name = "gan"
 
         if not os.path.exists(checkpoint_dir):
             os.makedirs(checkpoint_dir)
 
         self.saver.save(sess,
-                        os.path.join(checkpoint_dir, model_name),
+                        path.join(checkpoint_dir, model_name),
                         global_step=step)
 
     def load(self, sess, checkpoint_dir):
