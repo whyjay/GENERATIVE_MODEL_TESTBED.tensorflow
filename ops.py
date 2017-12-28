@@ -262,8 +262,11 @@ def residual_block(x, resample=None, labels=None, act=tf.nn.relu, norm=ln, init=
 
     return h
 
-def reparameterize(mu, logvar):
-    epsilon = tf.random_normal(tf.shape(logvar), name="epsilon")
-    return mu + epsilon * tf.exp(0.5*logvar)
+def reparameterize(mu, logvar, distribution='gaussian'):
+    if distribution == 'gaussian':
+        epsilon = tf.random_normal(tf.shape(logvar), name="epsilon")
+        z = mu + epsilon * tf.exp(0.5*logvar)
+    elif distribution == 'vmf':
+        pass
 
 ops_with_bn = [fc, conv2d, deconv2d]

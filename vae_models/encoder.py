@@ -70,7 +70,14 @@ def base_encoder(model, x, reuse=False):
                     feats = h
 
         h = tf.reshape(h, [bs, -1])
-        z_mu = fc(h, z_dim, act=None, norm=None)
-        z_logvar = 1e-10 + fc(h, z_dim, act=tf.nn.softplus, norm=None)
+
+        if self.latent_distribution == 'gaussian':
+            z_mu = fc(h, z_dim, act=None, norm=None)
+            z_logvar = 1e-10 + fc(h, z_dim, act=tf.nn.softplus, norm=None)
+        elif self.latent_distribution == 'vmf':
+            z_mu = fc(h, z_dim, act=None, norm=None),
+            z_mu = tf.nn.l2_normalize(z_mu, dim=1)
+            kappa = 1e-10 + fc(h, 1, act=tf.nn.softplus, norm=None)
+            z_logvar = kappa
 
     return z_mu, z_logvar

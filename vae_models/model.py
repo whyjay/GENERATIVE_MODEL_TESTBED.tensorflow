@@ -84,7 +84,7 @@ class VAE(object):
         #self.z = make_z(shape=[self.batch_size, self.z_dim])
 
         z_mu, z_logvar = self.encoder(image)
-        z = reparameterize(z_mu, z_logvar)
+        z = reparameterize(z_mu, z_logvar, self.latent_distribution)
         recon_image = self.decoder(z)
 
         loss_elbo, loss_recon, loss_kl = self.get_loss(image, recon_image, z_mu, z_logvar)
