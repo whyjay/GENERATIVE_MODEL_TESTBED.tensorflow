@@ -75,7 +75,7 @@ def base_encoder(model, x, reuse=False):
             z_mu = fc(h, z_dim, act=None, norm=None)
             z_logvar = 1e-10 + fc(h, z_dim, act=tf.nn.softplus, norm=None)
         elif self.latent_distribution == 'vmf':
-            z_mu = fc(h, z_dim, act=None, norm=None),
+            z_mu = fc(h, z_dim, act=None, norm=None)
             z_mu = tf.nn.l2_normalize(z_mu, dim=1)
             kappa = 1e-10 + fc(h, 1, act=tf.nn.softplus, norm=None)
             z_logvar = kappa
