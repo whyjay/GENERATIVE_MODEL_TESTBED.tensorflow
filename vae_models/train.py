@@ -34,7 +34,7 @@ def train(model, sess):
 
         # save checkpoint for every epoch
         if (idx*model.batch_size) % N < model.batch_size:
-            epoch = int(idx*model.batch_size/N)+1
+            epoch = int(idx*model.batch_size/N)
             print_time = time.time()
             total_time = print_time - start_time
             sec_per_epoch = (print_time - start_time) / epoch
