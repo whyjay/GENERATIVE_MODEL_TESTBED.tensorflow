@@ -42,7 +42,7 @@ def train(model, sess):
             image, label = dataset.next_batch(model.batch_size)
             summary = sess.run(merged_sum, feed_dict={model.image:image, model.label:label, model.z:get_z(model)})
 
-            model.writer.add_summary(summary, idx)
+            model.writer.add_summary(summary, epoch)
 
             sess.run(model.is_training.assign(False))
             _save_samples(model, sess, epoch)

@@ -78,8 +78,9 @@ class VAE(object):
         self.label = tf.placeholder(tf.float32, shape=[self.batch_size])
         self.noise = tf.placeholder(tf.float32, shape=[self.batch_size, self.z_dim])
         image = preprocess_image(self.image, self.dataset_name, self.use_augmentation)
-
-        #self.z = make_z(shape=[self.batch_size, self.z_dim])
+        if self.dataset_name == 'mnist':
+            image_ = np.random.uniform(size=image.get_shape())
+            image = tf.to_float(image > image_)
 
         z_mu, z_logvar = self.encoder(image)
         z = reparameterize(z_mu, z_logvar, self.latent_distribution)
@@ -89,7 +90,7 @@ class VAE(object):
 
         # optimizer
         self.get_vars()
-        opt = tf.train.AdamOptimizer(config.learning_rate, beta1=self.beta1, beta2=self.beta2)
+        opt = tf.train.AdamOptimizer(config.learning_rate)
         train_op = slim.learning.create_train_op(loss_elbo, opt, variables_to_train=self.t_vars)
 
         # logging
@@ -114,18 +115,19 @@ class VAE(object):
     def get_loss(self, image, recon_image, z_mu, z_logvar, eps = 1e-10):
         if self.dataset_name == 'mnist':
             loss_recon = -tf.reduce_sum(
-                image * tf.log(eps+recon_image) + (1-image) * tf.log(eps+1-recon_image), axis=1
+                image * tf.log(eps+recon_image) + (1-image) * tf.log(eps+1-recon_image), axis=[1, 2, 3]
             )
         else:
             loss_recon = tf.reduce_sum(2. * tf.square(image - recon_image), axis=[1,2,3])
-            loss_recon = tf.reduce_mean(loss_recon) / np.prod(self.image_shape)
+            loss_recon = tf.reduce_mean(loss_recon)# / np.prod(self.image_shape)
 
         if self.latent_distribution == 'gaussian':
             loss_kl = -0.5 * tf.reduce_sum(
                 1 + z_logvar - tf.square(z_mu) - tf.exp(z_logvar), axis=1
             )
-        elif self.latent_distribution == 'vmf':
-            loss_kl = tf.cast(self.k, tf.float32)
+        else:
+            print "invalid latent distribution : %s" % self.latent_distribution
+            raise
 
         loss_recon = tf.reduce_mean(loss_recon)
         loss_kl = tf.reduce_mean(loss_kl)

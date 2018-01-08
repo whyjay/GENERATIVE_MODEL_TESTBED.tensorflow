@@ -8,16 +8,16 @@ def base_decoder(model, z, reuse=False):
     fc_dim = model.fc_dim
     c_dim = model.c_dim
 
-    with slim.arg_scope(ops_with_bn, is_training=model.is_training):
+    with slim.arg_scope(ops_with_bn, is_training=model.is_training, init=None, norm=None):
 
         if model.dataset_name in ['mnist', 'fashion']:
             w = model.image_shape[0]
 
-            h = fc(z, fc_dim)
-            h = fc(h, f_dim*2*w/4*w/4)
-            h = tf.reshape(h, [-1, w/4, w/4, f_dim*2])
-            h = deconv2d(h, f_dim, 4, 2)
-            x = deconv2d(h, c_dim, 4, 2, act=tf.nn.sigmoid, norm=None)
+            h = fc(z, fc_dim/2, act=tf.nn.elu)
+            h = fc(h, 384, act=tf.nn.elu)
+            h = fc(h, fc_dim, act=tf.nn.elu)
+            x = fc(h, c_dim*w*w, act=tf.nn.sigmoid, norm=None)
+            x = tf.reshape(x, [-1, w, w, c_dim])
 
         elif model.dataset_name == 'affmnist':
             n_layer = 3

@@ -10,14 +10,12 @@ def base_encoder(model, x, reuse=False):
     c_dim = model.c_dim
     z_dim = model.z_dim
 
-    with slim.arg_scope(ops_with_bn, is_training=model.is_training):
+    with slim.arg_scope(ops_with_bn, is_training=model.is_training, init=None, norm=None):
 
         if model.dataset_name in ['mnist', 'fashion']:
-            w = model.image_shape[0]
-            h = conv2d(x, f_dim, 3, 1, act=lrelu)
-            h = conv2d(h, f_dim*2, 3, 1, act=lrelu)
-            h = tf.reshape(h, [bs, -1])
-            h = fc(h, fc_dim, act=lrelu)
+            h = fc(tf.reshape(x, [bs, -1]), fc_dim, act=tf.nn.elu)
+            h = fc(h, 384, act=tf.nn.elu)
+            h = fc(h, fc_dim/2, act=tf.nn.elu)
 
         elif model.dataset_name == 'affmnist':
             n_layer = 3
@@ -71,13 +69,7 @@ def base_encoder(model, x, reuse=False):
 
         h = tf.reshape(h, [bs, -1])
 
-        if self.latent_distribution == 'gaussian':
-            z_mu = fc(h, z_dim, act=None, norm=None)
-            z_logvar = fc(h, z_dim, act=None, norm=None)
-        elif self.latent_distribution == 'vmf':
-            z_mu = fc(h, z_dim, act=None, norm=None)
-            z_mu = tf.nn.l2_normalize(z_mu, dim=1)
-            kappa = 1e-10 + fc(h, 1, act=tf.nn.softplus, norm=None)
-            z_logvar = kappa
+        z_mu = fc(h, z_dim, act=None, norm=None)
+        z_logvar = fc(h, z_dim, act=None, norm=None)
 
     return z_mu, z_logvar
