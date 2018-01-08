@@ -25,12 +25,11 @@ def train(model, sess):
 
     for idx in xrange(1, max_iter):
         batch_start_time = time.time()
-        sess.run(model.is_training.assign(True))
 
         image, label = dataset.next_batch(model.batch_size)
         _, recon_image, input_image, z, loss_elbo, loss_kl, loss_recon = sess.run(
             [train_op, model.recon_image, model.input_image, model.z, model.loss_elbo, model.loss_kl, model.loss_recon],
-            feed_dict={model.image:image, model.label:label})
+            feed_dict={model.image:image, model.label:label, model.is_training:True})
 
         # save checkpoint for every epoch
         if (idx*model.batch_size) % N < model.batch_size:
@@ -44,7 +43,6 @@ def train(model, sess):
 
             model.writer.add_summary(summary, epoch)
 
-            sess.run(model.is_training.assign(False))
             _save_samples(model, sess, epoch)
             model.save(sess, model.checkpoint_dir, epoch)
 

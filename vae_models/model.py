@@ -40,7 +40,6 @@ class VAE(object):
         self.checkpoint_dir = config.checkpoint_dir
 
         self.use_augmentation = config.use_augmentation
-        self.is_training = tf.Variable(True, name='is_training', trainable=False)
 
     def save(self, sess, checkpoint_dir, step):
         model_name = "vae"
@@ -72,6 +71,7 @@ class VAE(object):
 
     def build_model(self):
         config = self.config
+        self.is_training = tf.placeholder_with_default(False, shape=[], name='is_training')
 
         # input
         self.image = tf.placeholder(tf.float32, shape=[self.batch_size]+self.image_shape)

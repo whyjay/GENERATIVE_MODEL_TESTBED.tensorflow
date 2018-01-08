@@ -25,13 +25,12 @@ def train(model, sess):
 
     for idx in xrange(1, max_iter):
         batch_start_time = time.time()
-        sess.run(model.is_training.assign(True))
 
         # D step
         image, label = dataset.next_batch(model.batch_size)
         _, d_real, d_fake = sess.run(
             [d_optim, model.d_real, model.d_fake],
-            feed_dict={model.image:image, model.label:label, model.z:get_z(model)})
+            feed_dict={model.image:image, model.label:label, model.z:get_z(model), model.is_training:True})
         '''
         # Wasserstein
         _ = sess.run([model.clip_d_op])
@@ -52,7 +51,6 @@ def train(model, sess):
             summary = sess.run(merged_sum, feed_dict={model.image:image, model.label:label, model.z:get_z(model)})
             model.writer.add_summary(summary, epoch)
 
-            sess.run(model.is_training.assign(False))
             _save_samples(model, sess, epoch)
             model.save(sess, model.checkpoint_dir, epoch)
 
