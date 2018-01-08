@@ -14,7 +14,7 @@ flags = tf.app.flags
 flags.DEFINE_integer("epoch", 1500, "Max epoch to train")
 flags.DEFINE_string("exp", 1, "Experiment number")
 flags.DEFINE_string("batch_size", 64, "Batch size")
-flags.DEFINE_string("learning_rate", 0.0002, "Learning rate")
+flags.DEFINE_string("learning_rate", 1e-3, "Learning rate")
 flags.DEFINE_string("load_cp_dir", '', "checkpoint path")
 flags.DEFINE_string("dataset", "cifar10", "[mnist, fashion, affmnist, cifar10]")
 flags.DEFINE_string("latent_distribution", "gaussian", "[gaussian]")

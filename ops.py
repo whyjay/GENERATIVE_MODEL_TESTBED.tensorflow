@@ -220,8 +220,8 @@ def preprocess_image(image, dataset, use_augmentation=False):
         image = tf.image.random_contrast(image, lower=0.9, upper=1.1)
     image = tf.minimum(tf.maximum(image, 0.0), 1.0)
 
-    if 'mnist' not in dataset:
-        image = tf.subtract(tf.divide(image, 255./2, name=None), 1)
+    if ('mnist' not in dataset) and ('fashion' not in dataset):
+        image = tf.subtract(image * 2., 1.)
 
     return image
 
